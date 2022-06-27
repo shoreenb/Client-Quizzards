@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Game, Home, NotFound } from "./pages";
 import { io } from "socket.io-client";
-
+import "./App.css";
 const socket = io("http://localhost:5000");
 
 const App = () => {
