@@ -1,10 +1,14 @@
 import React from 'react'
+import Canvas from '../../components/Canvas/Canvas';
 
 const Game = () => {
   return (
-    <h1>
-    Game Page
-    </h1>
+    <div className="canvasApp">
+      <Canvas
+        width={500}
+        height={300}
+      />
+    </div>
   )
 }
 

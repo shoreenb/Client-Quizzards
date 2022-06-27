@@ -5,7 +5,15 @@ const Home = () => {
     <h1>
         Home Page
     </h1>
+    
   )
 }
 
-export default Home;
+function App() {
+  return (
+    <div>Hello</div>
+  );
+}
+
+
+export default App;
