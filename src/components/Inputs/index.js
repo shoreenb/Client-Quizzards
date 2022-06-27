@@ -2,22 +2,24 @@ import React, { useState, useEffect } from "react";
 import { HomeBox } from "../index";
 
 export default function Inputs() {
-  const [username, setUsername] = useState("");
-  const [room, setRoom] = useState("");
+  const [usernameInput, setUsernameInput] = useState("");
+  const [roomInput, setRoomInput] = useState("");
+  const [userData, setUserData] = useState({ username: "", room: "" });
 
   const updateUsername = (e) => {
     const input = e.target.value;
-    setUsername(input);
-    console.log(username);
+    setUsernameInput(input);
   };
 
   const updateRoom = (e) => {
     const input = e.target.value;
-    setRoom(input);
-    console.log(room);
+    setRoomInput(input);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setUserData({ username: usernameInput, room: roomInput });
+  };
 
   return (
     <>
@@ -28,7 +30,7 @@ export default function Inputs() {
           id="username"
           name="username"
           placeholder="Username"
-          value={username}
+          value={usernameInput}
           onChange={updateUsername}
         />
         <label htmlFor="room"></label>
@@ -37,12 +39,12 @@ export default function Inputs() {
           id="room"
           name="room"
           placeholder="Room"
-          value={room}
+          value={roomInput}
           onChange={updateRoom}
         />
         <input type="submit" value="Join Room" />
       </form>
-      <HomeBox username={username} room={room} />
+      <HomeBox username={userData.username} room={userData.room} />
     </>
   );
 }
