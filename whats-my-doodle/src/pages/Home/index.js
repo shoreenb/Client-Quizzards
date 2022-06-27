@@ -1,5 +1,4 @@
 import React from 'react'
-import Canvas from '../../components/Canvas/Canvas';
 
 const Home = () => {
   return (
@@ -10,16 +9,11 @@ const Home = () => {
   )
 }
 
-function canvasApp() {
+function App() {
   return (
-    <div className="canvasApp">
-      <Canvas
-        width={500}
-        height={300}
-      />
-    </div>
+    <div>Hello</div>
   );
 }
 
 
-export default canvasApp;
+export default App;
