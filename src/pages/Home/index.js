@@ -1,19 +1,13 @@
-import React from 'react'
+import React from "react";
+import { HomeBox, Inputs } from "../../components";
 
 const Home = () => {
   return (
-    <h1>
-        Home Page
-    </h1>
-    
-  )
-}
-
-function App() {
-  return (
-    <div>Hello</div>
+    <div className="home">
+      <h1>Home Page</h1>
+      <Inputs />
+    </div>
   );
-}
+};
 
-
-export default App;
+export default Home;
