@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { socket } from "../../App";
+import { useNavigate } from "react-router-dom";
 
-export default function HomeBox() {
+export default function HomeBox({ startReady, room, user }) {
   const [roomText, setRoomText] = useState("");
   const [players, setPlayers] = useState([]);
+
+  const navigate = useNavigate();
 
   socket.on("attachRoom", (room) => {
     setRoomText(room);
@@ -23,7 +26,15 @@ export default function HomeBox() {
 
   const handleSendData = (e) => {
     e.preventDefault();
+    socket.emit("sendData", room, user, players);
+    socket.emit("navigateAllPlayers", room);
+    navigate("/game", { replace: true });
   };
+
+  socket.on("navigateToGame", () => {
+    socket.emit("sendData", room, user, players);
+    navigate("/game", { replace: true });
+  });
 
   return (
     <>
@@ -41,7 +52,9 @@ export default function HomeBox() {
         </div>
       </div>
       <form action="javascript:void(0);" className="" onSubmit={handleSendData}>
-        <button type="submit">Start game!</button>
+        <button disabled={!startReady} type="submit">
+          Start game!
+        </button>
       </form>
     </>
   );
