@@ -54,7 +54,7 @@ export default function HomeBox({ startReady, room, user }) {
         <p className="connection"></p>
         <h3>Room Name:</h3>
         <div className="room">{roomText}</div>
-        <h3>Players</h3>
+        <h3>Players:</h3>
         <div className="players">
           {players.map((player) => (
             <div key={player + Math.floor(Math.random() * 10 + 1)}>
@@ -64,6 +64,7 @@ export default function HomeBox({ startReady, room, user }) {
         </div>
       </div>
       <form action="javascript:void(0);" className="" onSubmit={handleSendData}>
+<<<<<<< HEAD
         <label htmlFor="category">Choose a category</label>
         <select
           id="category"
@@ -77,6 +78,9 @@ export default function HomeBox({ startReady, room, user }) {
           <option value="drinks">Drinks</option>
         </select>
         <button disabled={!startReady} type="submit">
+=======
+        <button className="start-btn" disabled={!startReady} type="submit">
+>>>>>>> 85d49a512fb33da49f8111c26203827c025f1e78
           Start game!
         </button>
       </form>
