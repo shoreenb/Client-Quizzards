@@ -10,8 +10,8 @@ export default function HomeBox() {
     /* playersArea.textContent = socket.id; */
   });
 
-  socket.on("addPlayer", (user, room) => {
-    setPlayers([...players, user]);
+  socket.on("addPlayer", (newPlayers, room) => {
+    setPlayers([...newPlayers]);
   });
   window.addEventListener("load", (event) => {
     console.log("page is fully loaded");
@@ -26,7 +26,9 @@ export default function HomeBox() {
         <h3>Players</h3>
         <div className="players">
           {players.map((player) => (
-            <p key={player + Math.floor(Math.random() * 10 + 1)}>{player}</p>
+            <div key={player + Math.floor(Math.random() * 10 + 1)}>
+              {player}
+            </div>
           ))}
         </div>
       </div>

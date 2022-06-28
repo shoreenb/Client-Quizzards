@@ -6,6 +6,8 @@ export default function Inputs() {
   const [roomInput, setRoomInput] = useState("");
 
   const [room, setRoom] = useState("");
+  const [roomLocked, setRoomLocked] = useState(false);
+  const [userLocked, setUserLocked] = useState(true);
 
   //Controlled forms
   const updateUsername = (e) => {
@@ -23,6 +25,8 @@ export default function Inputs() {
 
     let chosenRoom = roomInput;
     setRoom(chosenRoom);
+    setRoomLocked(true);
+    setUserLocked(false);
     setRoomInput("");
 
     socket.emit("joinRoomPress", chosenRoom);
@@ -31,6 +35,7 @@ export default function Inputs() {
     e.preventDefault();
 
     let user = usernameInput;
+    setUserLocked(true);
     setUsernameInput("");
     socket.emit("addUserPress", user, room);
   };
@@ -50,6 +55,7 @@ export default function Inputs() {
           placeholder="Room"
           value={roomInput}
           onChange={updateRoom}
+          disabled={roomLocked}
         />
 
         <div className="form-nav">
@@ -72,6 +78,7 @@ export default function Inputs() {
           placeholder="Username"
           value={usernameInput}
           onChange={updateUsername}
+          disabled={userLocked}
         />{" "}
         <div className="form-nav">
           <button type="submit" className="username-btn">
