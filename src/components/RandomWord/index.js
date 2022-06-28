@@ -9,5 +9,18 @@ export default function RandomWord() {
     setCatergory(catergoryInput);
   });
 
-  return <>{category ? <h3>{category}</h3> : <h3>Error</h3>}</>;
+  return (
+    <div className="randomWordContainer">
+      <div>
+        {category ? (
+          <h3 className="gameTitle">Catergory: {category}</h3>
+        ) : (
+          <h3>Error</h3>
+        )}
+      </div>
+      <div>
+        <p className="word"> Word That has to be blurred</p>
+      </div>
+    </div>
+  );
 }
