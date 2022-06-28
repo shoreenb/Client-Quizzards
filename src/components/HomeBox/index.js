@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function HomeBox({ startReady, room, user }) {
   const [roomText, setRoomText] = useState("");
   const [players, setPlayers] = useState([]);
+  const [catergoryInput, setCatergoryInput] = useState("animals");
 
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ export default function HomeBox({ startReady, room, user }) {
     e.preventDefault();
     socket.emit("sendData", room, user, players);
     socket.emit("navigateAllPlayers", room);
+    socket.emit("sendCatergory", catergoryInput);
     navigate("/game", { replace: true });
   };
 
@@ -35,6 +37,16 @@ export default function HomeBox({ startReady, room, user }) {
     socket.emit("sendData", room, user, players);
     navigate("/game", { replace: true });
   });
+
+  // Category Select
+
+  const updateCatergory = (e) => {
+    const input = e.target.value;
+    console.log(input);
+
+    setCatergoryInput(input);
+    console.log(catergoryInput);
+  };
 
   return (
     <>
@@ -52,6 +64,18 @@ export default function HomeBox({ startReady, room, user }) {
         </div>
       </div>
       <form action="javascript:void(0);" className="" onSubmit={handleSendData}>
+        <label htmlFor="category">Choose a category</label>
+        <select
+          id="category"
+          name="category"
+          className="textarea"
+          value={catergoryInput}
+          onChange={updateCatergory}
+        >
+          <option value="animals">Animals</option>
+          <option value="food">Food</option>
+          <option value="drinks">Drinks</option>
+        </select>
         <button disabled={!startReady} type="submit">
           Start game!
         </button>
