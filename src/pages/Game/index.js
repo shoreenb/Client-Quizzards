@@ -1,7 +1,7 @@
 import React from "react";
 import { Canvas } from "../../components";
 import { MessageBox } from "../../components";
-import { CountdownApp } from "../../components";
+import { Countdown } from "../../components";
 
 const Game = () => {
   return (
@@ -9,7 +9,7 @@ const Game = () => {
       <div className="canvasApp">
         <Canvas width={1000} height={600} />
       </div>
-      <CountdownApp />
+      <Countdown />
       <MessageBox/>
     </>
   );
