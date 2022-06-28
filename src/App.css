@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap");
 
 *,
 *::after,
@@ -9,7 +9,6 @@
 body {
   margin: 0;
   padding: 0;
-
 }
 
 #bkImg {
@@ -23,6 +22,17 @@ body {
   opacity: 50%;
 }
 
+.bkImgGame {
+  background-color: 101, 199, 179;
+  background-image: url(./img/bk-img.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  position: absolute;
+  opacity: 50%;
+}
 
 .home {
   width: 100%;
@@ -35,10 +45,9 @@ body {
 }
 
 h1 {
-  font-family: 'Henny Penny', cursive;
+  font-family: "Henny Penny", cursive;
   font-size: 72px;
   text-shadow: 10px 10px 8px red, 15px 15px 8px green, 5px 5px 8px blue;
-  
 }
 
 h1:hover {
@@ -46,13 +55,27 @@ h1:hover {
 }
 
 @keyframes jump-shaking {
-  0% { transform: translateX(0) }
-  25% { transform: translateY(-9px) }
-  35% { transform: translateY(-9px) rotate(5deg) }
-  55% { transform: translateY(-9px) rotate(-5deg) }
-  65% { transform: translateY(-9px) rotate(5deg) }
-  75% { transform: translateY(-9px) rotate(-5deg) }
-  100% { transform: translateY(0) rotate(0) }
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateY(-9px);
+  }
+  35% {
+    transform: translateY(-9px) rotate(5deg);
+  }
+  55% {
+    transform: translateY(-9px) rotate(-5deg);
+  }
+  65% {
+    transform: translateY(-9px) rotate(5deg);
+  }
+  75% {
+    transform: translateY(-9px) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+  }
 }
 
 .home-box {
@@ -62,8 +85,19 @@ h1:hover {
   background-color: white;
 }
 
-.canvasApp{
+.canvasApp {
   position: relative;
   left: 50px;
   top: 50px;
+}
+
+/* Game Page */
+
+.gamePageContainer {
+  width: 100%;
+  position: absolute;
+  top: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
