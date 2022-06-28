@@ -10,7 +10,9 @@ const Game = () => {
         <Canvas width={1000} height={600} />
       </div>
       <Countdown />
+
       <MessageBox/>
+
     </>
   );
 };

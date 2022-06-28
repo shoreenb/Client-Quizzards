@@ -1,6 +1,9 @@
-import useCountdown from './useCountdown';
+import useCountdown from "./useCountdown";
+
 
 function Countdown() {
+
+
   const endTime = new Date().getTime() + 60000 * 1; // 1 minutes
   const [timeLeft, setEndTime] = useCountdown(endTime);
 
@@ -15,4 +18,7 @@ function Countdown() {
   );
 }
 
+
 export default Countdown;
+
+
