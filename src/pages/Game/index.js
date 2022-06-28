@@ -22,7 +22,6 @@ const Game = () => {
           <Canvas width={700} height={500} />
         </div>
         <div className="messageBoxComponent">
-          <DisplayBox />
           <MessageBox />
         </div>
       </div>

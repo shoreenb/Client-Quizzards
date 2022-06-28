@@ -96,11 +96,23 @@ h1:hover {
 .gamePageContainer {
   width: 100%;
   position: absolute;
+
   top: 20%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
 }
+canvas {
+  background-color: white;
+}
+.canvasApp {
+  flex-basis: 1;
+}
+
+.messageBoxComponent {
+}
+
 #message-container {
   width: 320px;
   height: 600px;
