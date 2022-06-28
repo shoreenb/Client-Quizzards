@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap');
+
 *,
 *::after,
 *::before {
@@ -31,6 +33,28 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+h1 {
+  font-family: 'Henny Penny', cursive;
+  font-size: 72px;
+  box-shadow: 5px 5px 5px blue, 10px 10px 8px red, 15px 15px 8px green;
+  
+}
+
+h1:hover {
+  animation: jump-shaking 0.83s infinite;
+}
+
+@keyframes jump-shaking {
+  0% { transform: translateX(0) }
+  25% { transform: translateY(-9px) }
+  35% { transform: translateY(-9px) rotate(17deg) }
+  55% { transform: translateY(-9px) rotate(-17deg) }
+  65% { transform: translateY(-9px) rotate(17deg) }
+  75% { transform: translateY(-9px) rotate(-17deg) }
+  100% { transform: translateY(0) rotate(0) }
+}
+
 .home-box {
   border: 1px solid black;
   width: 40%;

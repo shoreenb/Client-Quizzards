@@ -6,7 +6,7 @@ const Home = () => {
     <>
        <div id="bkImg"></div>
       <div className="home">
-        <h1>Home Page</h1>
+        <h1>What's My Doodle?</h1>
         <Inputs />
       </div>
      
