@@ -10,7 +10,7 @@ function Countdown() {
   return (
     <div className="Countdown">
       <p>{`${minutes}:${seconds}`}</p>
-      <button onClick={() => setEndTime(endTime)}>Reset</button>
+      <button onClick={() => setEndTime(endTime)}>Start</button>
     </div>
   );
 }
