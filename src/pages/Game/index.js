@@ -1,5 +1,11 @@
 import React from "react";
-import { Canvas, DisplayBox, MessageBox, Users } from "../../components";
+import {
+  Canvas,
+  DisplayBox,
+  MessageBox,
+  Users,
+  Countdown,
+} from "../../components";
 
 import "../../App.css";
 
@@ -9,6 +15,7 @@ const Game = () => {
       <div className="bkImgGame"></div>
       <div className="gamePageContainer">
         <div className="UserComponent">
+          <Countdown />
           <Users />
         </div>
         <div className="canvasApp">
