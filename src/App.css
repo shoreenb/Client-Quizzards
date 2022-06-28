@@ -23,3 +23,9 @@ body {
   width: 60%;
   height: 400px;
 }
+
+.canvasApp{
+  position: relative;
+  left: 50px;
+  top: 50px;
+}

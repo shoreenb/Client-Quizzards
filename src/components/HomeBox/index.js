@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { socket } from "../../App";
 
-export default function HomeBox() {
+export default function HomeBox({ startReady, room, user }) {
   const [roomText, setRoomText] = useState("");
   const [players, setPlayers] = useState([]);
 
@@ -10,7 +10,17 @@ export default function HomeBox() {
     /* playersArea.textContent = socket.id; */
   });
 
-  /* socket.on("addPlayer", (room) => {}); */
+  socket.on("addPlayer", (newPlayers, room) => {
+    setPlayers([...newPlayers]);
+  });
+  window.addEventListener("load", (event) => {
+    console.log("page is fully loaded");
+  });
+
+  const handleSendData = (e) => {
+    e.preventDefault();
+    socket.emit("sendData", room, user, players);
+  };
 
   return (
     <>
@@ -19,9 +29,19 @@ export default function HomeBox() {
         <h3>Room Name:</h3>
         <div className="room">{roomText}</div>
         <h3>Players</h3>
-        <div className="players">{players.current}</div>
+        <div className="players">
+          {players.map((player) => (
+            <div key={player + Math.floor(Math.random() * 10 + 1)}>
+              {player}
+            </div>
+          ))}
+        </div>
       </div>
-      <button>Start game!</button>
+      <form action="javascript:void(0);" className="" onSubmit={handleSendData}>
+        <button disabled={!startReady} type="submit">
+          Start game!
+        </button>
+      </form>
     </>
   );
 }

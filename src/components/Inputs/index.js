@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HomeBox } from "../index";
 import { socket } from "../../App";
 export default function Inputs() {
   const [usernameInput, setUsernameInput] = useState("");
   const [roomInput, setRoomInput] = useState("");
 
+  const [user, setUser] = useState("");
   const [room, setRoom] = useState("");
+  const [roomLocked, setRoomLocked] = useState(false);
+  const [userLocked, setUserLocked] = useState(true);
+  const [startReady, setStartReady] = useState(false);
 
   //Controlled forms
   const updateUsername = (e) => {
@@ -18,22 +22,26 @@ export default function Inputs() {
     setRoomInput(input);
   };
 
-  socket.on("addPlayer", (user, room) => {
-    console.log(user, room);
-  });
-
   const handleSubmitRoom = (e) => {
     e.preventDefault();
-
+    if (roomInput == "") return;
     let chosenRoom = roomInput;
     setRoom(chosenRoom);
-    console.log(chosenRoom);
+    setRoomLocked(true);
+    setUserLocked(false);
+    setRoomInput("");
+
     socket.emit("joinRoomPress", chosenRoom);
   };
   const handleSubmitUser = (e) => {
     e.preventDefault();
-    let user = usernameInput;
-    socket.emit("addUserPress", user, room);
+
+    let chosenUser = usernameInput;
+    setUser(chosenUser);
+    setUserLocked(true);
+    setStartReady(true);
+    setUsernameInput("");
+    socket.emit("addUserPress", chosenUser, room);
   };
 
   return (
@@ -51,6 +59,7 @@ export default function Inputs() {
           placeholder="Room"
           value={roomInput}
           onChange={updateRoom}
+          disabled={roomLocked}
         />
 
         <div className="form-nav">
@@ -73,7 +82,8 @@ export default function Inputs() {
           placeholder="Username"
           value={usernameInput}
           onChange={updateUsername}
-        />{" "}
+          disabled={userLocked}
+        />
         <div className="form-nav">
           <button type="submit" className="username-btn">
             Select Username
@@ -82,7 +92,7 @@ export default function Inputs() {
         </div>
       </form>
 
-      <HomeBox />
+      <HomeBox startReady={startReady} room={room} user={user} />
     </>
   );
 }
