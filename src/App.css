@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
 
 *,
 *::after,
@@ -89,3 +90,32 @@ h1:hover {
   right:150px;
   bottom: 20px;
 }
+
+button {
+  border-radius: 8px;
+  background-color: #008CBA;
+  border: none;
+  padding: 10px 24px;
+  width: 100%;
+  color: white;
+  font-family: 'Gloria Hallelujah', cursive;
+  margin-top: 5px;
+}
+
+button:hover {
+  animation: skew-y-shake 1.3s infinite;
+}
+
+@keyframes skew-y-shake {
+  0% { transform: skewY(-3deg); }
+  5% { transform: skewY(3deg); }
+  10% { transform: skewY(-3deg); }
+  15% { transform: skewY(3deg); }
+  20% { transform: skewY(0deg); }
+  100% { transform: skewY(0deg); }  
+}
+
+input {
+  
+}
+
