@@ -79,7 +79,7 @@ export default function Inputs() {
           value={usernameInput}
           onChange={updateUsername}
           disabled={userLocked}
-        />{" "}
+        />
         <div className="form-nav">
           <button type="submit" className="username-btn">
             Select Username

@@ -17,6 +17,10 @@ export default function HomeBox() {
     console.log("page is fully loaded");
   });
 
+  const handleSendData = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <div className="home-box">
@@ -32,7 +36,9 @@ export default function HomeBox() {
           ))}
         </div>
       </div>
-      <button>Start game!</button>
+      <form action="javascript:void(0);" className="" onSubmit={handleSendData}>
+        <button type="submit">Start game!</button>
+      </form>
     </>
   );
 }
