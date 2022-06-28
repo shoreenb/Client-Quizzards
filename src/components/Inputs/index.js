@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { HomeBox } from "../index";
 import { socket } from "../../App";
 export default function Inputs() {
@@ -23,6 +23,7 @@ export default function Inputs() {
 
     let chosenRoom = roomInput;
     setRoom(chosenRoom);
+    setRoomInput("");
 
     socket.emit("joinRoomPress", chosenRoom);
   };
@@ -30,6 +31,7 @@ export default function Inputs() {
     e.preventDefault();
 
     let user = usernameInput;
+    setUsernameInput("");
     socket.emit("addUserPress", user, room);
   };
 

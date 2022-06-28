@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { socket } from "../../App";
 
 export default function HomeBox() {
@@ -10,8 +10,11 @@ export default function HomeBox() {
     /* playersArea.textContent = socket.id; */
   });
 
-  socket.on("addPlayer", (room, user) => {
-    console.log(user, room);
+  socket.on("addPlayer", (user, room) => {
+    setPlayers([...players, user]);
+  });
+  window.addEventListener("load", (event) => {
+    console.log("page is fully loaded");
   });
 
   return (
@@ -21,7 +24,11 @@ export default function HomeBox() {
         <h3>Room Name:</h3>
         <div className="room">{roomText}</div>
         <h3>Players</h3>
-        <div className="players">{players.current}</div>
+        <div className="players">
+          {players.map((player) => (
+            <p key={player + Math.floor(Math.random() * 10 + 1)}>{player}</p>
+          ))}
+        </div>
       </div>
       <button>Start game!</button>
     </>
