@@ -37,7 +37,7 @@ body {
 h1 {
   font-family: 'Henny Penny', cursive;
   font-size: 72px;
-  text-shadow: 10px 10px 8px red, 15px 15px 8px green, 5px 5px 8px blue;
+  text-shadow: 10px 10px 8px rgba(255,0,0,0.6), 15px 15px 8px rgba(0,255,0,0.4), 5px 5px 8px rgba(0,0,255,0.6);
   
 }
 
