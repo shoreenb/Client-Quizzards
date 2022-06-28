@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { socket } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 export default function HomeBox({ startReady, room, user }) {
   const [roomText, setRoomText] = useState("");
   const [players, setPlayers] = useState([]);
+
+  const navigate = useNavigate();
 
   socket.on("attachRoom", (room) => {
     setRoomText(room);
@@ -20,6 +23,7 @@ export default function HomeBox({ startReady, room, user }) {
   const handleSendData = (e) => {
     e.preventDefault();
     socket.emit("sendData", room, user, players);
+    navigate("/game", { replace: true });
   };
 
   return (
