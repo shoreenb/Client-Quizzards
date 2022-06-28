@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Game, Home, NotFound } from "./pages";
-import { io } from "socket.io-client";
 import "./App.css";
-const socket = io("http://localhost:5000");
+import { io } from "socket.io-client";
+
+export const socket = io("http://localhost:5000");
+// export const socket = io("https://quizzards-the-game.herokuapp.com/");
 
 const App = () => {
+  useEffect(() => {});
   return (
     <>
       <Routes>
