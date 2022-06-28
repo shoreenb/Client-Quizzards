@@ -111,6 +111,7 @@ canvas {
 }
 
 .messageBoxComponent {
+  width: 200px;
 }
 
 #message-container {
