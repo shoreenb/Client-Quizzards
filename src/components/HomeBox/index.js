@@ -10,7 +10,9 @@ export default function HomeBox() {
     /* playersArea.textContent = socket.id; */
   });
 
-  /* socket.on("addPlayer", (room) => {}); */
+  socket.on("addPlayer", (room, user) => {
+    console.log(user, room);
+  });
 
   return (
     <>

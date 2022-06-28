@@ -18,20 +18,17 @@ export default function Inputs() {
     setRoomInput(input);
   };
 
-  socket.on("addPlayer", (user, room) => {
-    console.log(user, room);
-  });
-
   const handleSubmitRoom = (e) => {
     e.preventDefault();
 
     let chosenRoom = roomInput;
     setRoom(chosenRoom);
-    console.log(chosenRoom);
+
     socket.emit("joinRoomPress", chosenRoom);
   };
   const handleSubmitUser = (e) => {
     e.preventDefault();
+
     let user = usernameInput;
     socket.emit("addUserPress", user, room);
   };
