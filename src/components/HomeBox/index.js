@@ -42,10 +42,7 @@ export default function HomeBox({ startReady, room, user }) {
 
   const updateCatergory = (e) => {
     const input = e.target.value;
-    console.log(input);
-
     setCatergoryInput(input);
-    console.log(catergoryInput);
   };
 
   return (
