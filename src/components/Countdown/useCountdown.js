@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import { useEffect, useState } from "react";
 
 const calcTimeLeft = (t) => {
-=======
-import { useEffect, useState } from 'react';
-
-const calcTimeLeft = t => {
->>>>>>> 85d49a512fb33da49f8111c26203827c025f1e78
   if (!t) return 0;
 
   const left = t - new Date().getTime();
@@ -36,8 +30,4 @@ export default function useCountdown(endTime) {
   }, [end]);
 
   return [timeLeft, setEndTime];
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 85d49a512fb33da49f8111c26203827c025f1e78

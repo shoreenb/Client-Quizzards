@@ -64,7 +64,6 @@ export default function HomeBox({ startReady, room, user }) {
         </div>
       </div>
       <form action="javascript:void(0);" className="" onSubmit={handleSendData}>
-<<<<<<< HEAD
         <label htmlFor="category">Choose a category</label>
         <select
           id="category"
@@ -78,9 +77,6 @@ export default function HomeBox({ startReady, room, user }) {
           <option value="drinks">Drinks</option>
         </select>
         <button disabled={!startReady} type="submit">
-=======
-        <button className="start-btn" disabled={!startReady} type="submit">
->>>>>>> 85d49a512fb33da49f8111c26203827c025f1e78
           Start game!
         </button>
       </form>
