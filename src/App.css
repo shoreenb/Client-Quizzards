@@ -59,6 +59,7 @@ h1:hover {
   border: 1px solid black;
   width: 60%;
   height: 400px;
+  background-color: white;
 }
 
 .canvasApp{
