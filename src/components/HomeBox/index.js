@@ -23,8 +23,14 @@ export default function HomeBox({ startReady, room, user }) {
   const handleSendData = (e) => {
     e.preventDefault();
     socket.emit("sendData", room, user, players);
+    socket.emit("navigateAllPlayers", room);
     navigate("/game", { replace: true });
   };
+
+  socket.on("navigateToGame", () => {
+    socket.emit("sendData", room, user, players);
+    navigate("/game", { replace: true });
+  });
 
   return (
     <>
