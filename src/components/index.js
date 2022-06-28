@@ -5,3 +5,4 @@ export { default as Users } from "./Users";
 export { default as Inputs } from "./Inputs";
 export { default as HomeBox } from "./HomeBox";
 export { default as MessageBox } from "./MessageBox";
+export { default as NewCanvas } from "./NewCanvas";
