@@ -114,15 +114,45 @@ canvas {
   width: 200px;
 }
 
+.userCardContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.userCard {
+  height: 80px;
+  width: 260px;
+  background-color: rgb(101, 119, 179);
+  padding: 5px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.usernameCard {
+  font-size: 22px;
+  font-weight: 100px;
+  color: rgb(31, 32, 32);
+  margin-left: 8px;
+  text-align: start;
+}
+.usernamePoints {
+  color: rgb(234, 238, 240);
+
+  /* margin-top: 3px; */
+  margin-right: 22px;
+}
 #message-container {
   width: 320px;
   height: 600px;
   padding: 10px;
   border: 5px solid gray;
   margin: 0;
-  position: absolute;
+  /* position: absolute;
   right: 10px;
-  top: 50px;
+  top: 50px; */
 }
 
 #message-container div {
@@ -131,7 +161,7 @@ canvas {
 }
 
 #message-input {
-  position: absolute;
+  /* position: absolute;
   right: 150px;
-  bottom: 20px;
+  bottom: 20px; */
 }
