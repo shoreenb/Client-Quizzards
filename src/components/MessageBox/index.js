@@ -1,60 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { socket } from "../../App";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
 export default function MessageBox() {
-    const [messageInput, setMessageInput] = useState("");
-    const [room, setRoom] = useState("");
-    const [user, setUser] = useState("");
-    const [players, setPlayers] = useState([]);
-    const [messages, setMessages] = useState([]);
+  const [messageInput, setMessageInput] = useState("");
+  const [room, setRoom] = useState("");
+  const [user, setUser] = useState("");
+  const [players, setPlayers] = useState([]);
+  const [messages, setMessages] = useState([]);
 
-// socket.on("recieveMessage,",()=>{
-//     displayMessage(message)
-// })
+  socket.on("recieveMessage,", (message) => {
+    console.log("working");
+    setMessages([...messages, message]);
+  });
 
-socket.on("recieveData", (room, user, players) =>{
-    setPlayers(players)
-})
+  socket.on("recieveData", (roomData, userData, playersData) => {
+    setPlayers(playersData);
+    setRoom(roomData);
+    setUser(userData);
+  });
 
-const updateMessage = (e) => {
+  const updateMessage = (e) => {
     const input = e.target.value;
     setMessageInput(input);
   };
 
-  function displayMessage(message){
-    const container = React.createElement('div', {}, message);
-    ReactDOM.render(
-        container,
-        document.getElementById('global')
-      );
-
-  }
-
-const handleSubmitMessage = (e) => {
+  console.log(room, user, players);
+  const handleSubmitMessage = (e) => {
     e.preventDefault();
 
-   console.log(messageInput)  
-    socket.emit("sendMessage",messageInput,room)
-    setMessages([...messages, messageInput])
-
+    socket.emit("sendMessage", messageInput, room, user);
+    setMessages([...messages, messageInput]);
   };
 
-
-return(
+  return (
     <>
-        <div id = "message-container">
-             <div className="messages">
+      <div id="message-container">
+        <div className="messages">
           {messages.map((message) => (
-            <div key={message + Math.floor(Math.random() * 10 + 1)}>
-              {message}
-            </div>
+            <div key={message}>{message}</div>
           ))}
         </div>
-        </div>
+      </div>
 
-
-       <form id = "message-input"
+      <form
+        id="message-input"
         action="javascript:void(0);"
         className=""
         onSubmit={handleSubmitMessage}
@@ -75,8 +65,6 @@ return(
           </button>
         </div>
       </form>
-
-
     </>
-)
+  );
 }
