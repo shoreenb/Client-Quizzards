@@ -37,7 +37,7 @@ body {
 h1 {
   font-family: 'Henny Penny', cursive;
   font-size: 72px;
-  box-shadow: 5px 5px 5px blue, 10px 10px 8px red, 15px 15px 8px green;
+  text-shadow: 10px 10px 8px red, 15px 15px 8px green, 5px 5px 8px blue;
   
 }
 
@@ -48,10 +48,10 @@ h1:hover {
 @keyframes jump-shaking {
   0% { transform: translateX(0) }
   25% { transform: translateY(-9px) }
-  35% { transform: translateY(-9px) rotate(17deg) }
-  55% { transform: translateY(-9px) rotate(-17deg) }
-  65% { transform: translateY(-9px) rotate(17deg) }
-  75% { transform: translateY(-9px) rotate(-17deg) }
+  35% { transform: translateY(-9px) rotate(5deg) }
+  55% { transform: translateY(-9px) rotate(-5deg) }
+  65% { transform: translateY(-9px) rotate(5deg) }
+  75% { transform: translateY(-9px) rotate(-5deg) }
   100% { transform: translateY(0) rotate(0) }
 }
 
@@ -59,6 +59,7 @@ h1:hover {
   border: 1px solid black;
   width: 60%;
   height: 400px;
+  background-color: white;
 }
 
 .canvasApp{
