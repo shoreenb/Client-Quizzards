@@ -9,12 +9,24 @@ export default function MessageBox() {
   const [players, setPlayers] = useState([]);
   const [messages, setMessages] = useState([]);
 
+<<<<<<< HEAD
   // socket.on("recieveMessage,",()=>{
   //     displayMessage(message)
   // })
 
   socket.on("recieveData", (room, user, players) => {
     setPlayers(players);
+=======
+  socket.on("recieveMessage,", (message) => {
+    console.log("working");
+    setMessages([...messages, message]);
+  });
+
+  socket.on("recieveData", (roomData, userData, playersData) => {
+    setPlayers(playersData);
+    setRoom(roomData);
+    setUser(userData);
+>>>>>>> 2f0594ceb21a553f5f3675b95da69ee59673b8de
   });
 
   const updateMessage = (e) => {
@@ -22,6 +34,7 @@ export default function MessageBox() {
     setMessageInput(input);
   };
 
+<<<<<<< HEAD
   function displayMessage(message) {
     const container = React.createElement("div", {}, message);
     ReactDOM.render(container, document.getElementById("global"));
@@ -32,6 +45,13 @@ export default function MessageBox() {
 
     console.log(messageInput);
     socket.emit("sendMessage", messageInput, room);
+=======
+  console.log(room, user, players);
+  const handleSubmitMessage = (e) => {
+    e.preventDefault();
+
+    socket.emit("sendMessage", messageInput, room, user);
+>>>>>>> 2f0594ceb21a553f5f3675b95da69ee59673b8de
     setMessages([...messages, messageInput]);
   };
 
@@ -40,9 +60,7 @@ export default function MessageBox() {
       <div id="message-container">
         <div className="messages">
           {messages.map((message) => (
-            <div key={message + Math.floor(Math.random() * 10 + 1)}>
-              {message}
-            </div>
+            <div key={message}>{message}</div>
           ))}
         </div>
       </div>
