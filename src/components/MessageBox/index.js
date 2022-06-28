@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { socket } from "../../App";
 import ReactDOM from "react-dom";
 
@@ -10,12 +10,11 @@ export default function MessageBox() {
   const [messages, setMessages] = useState([]);
 
   socket.on("recieveMessage,", (message) => {
-    console.log("working");
     setMessages([...messages, message]);
   });
 
   socket.on("recieveData", (roomData, userData, playersData) => {
-    setPlayers(playersData);
+    setPlayers([...playersData]);
     setRoom(roomData);
     setUser(userData);
   });
@@ -25,7 +24,6 @@ export default function MessageBox() {
     setMessageInput(input);
   };
 
-  console.log(room, user, players);
   const handleSubmitMessage = (e) => {
     e.preventDefault();
 
