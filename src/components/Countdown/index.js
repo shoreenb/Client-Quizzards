@@ -8,7 +8,7 @@ export default function Countdown() {
   const seconds = Math.floor(timeLeft / 1000) % 60;
 
   return (
-    <div className="CountdownApp">
+    <div>
       <p>{`${minutes}:${seconds}`}</p>
       <button onClick={() => setEndTime(endTime)}>Reset</button>
     </div>
