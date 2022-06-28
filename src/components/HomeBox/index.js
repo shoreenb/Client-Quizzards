@@ -11,7 +11,7 @@ export default function HomeBox() {
   });
 
   socket.on("maxPartyError", (room) => {
-    console.log(room);
+    setRoomText(`The maxed room size for ${room} has been reached!`);
   });
 
   socket.on("addPlayer", (newPlayers, room) => {
