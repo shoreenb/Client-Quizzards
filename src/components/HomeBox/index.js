@@ -10,6 +10,10 @@ export default function HomeBox() {
     /* playersArea.textContent = socket.id; */
   });
 
+  socket.on("maxPartyError", (room) => {
+    console.log(room);
+  });
+
   socket.on("addPlayer", (newPlayers, room) => {
     setPlayers([...newPlayers]);
   });
