@@ -2,28 +2,27 @@ import React, { useState, useEffect } from "react";
 import { socket } from "../../App";
 
 export default function MessageBox() {
-    const [messageInput, setMessageInput] = useState("");
+  const [messageInput, setMessageInput] = useState("");
 
-// socket.on("recieveMessage,",()=>{
-//     displayMessage(message)
-// })
+  // socket.on("recieveMessage,",()=>{
+  //     displayMessage(message)
+  // })
 
-const updateMessage = (e) => {
+  const updateMessage = (e) => {
     const input = e.target.value;
     setMessageInput(input);
   };
 
-const handleSubmitMessage = (e) => {
+  const handleSubmitMessage = (e) => {
     e.preventDefault();
 
-   console.log(messageInput)  
-    socket.emit("sendMessage",messageInput)
+    console.log(messageInput);
+    socket.emit("sendMessage", messageInput);
   };
 
-
-return(
+  return (
     <>
-       <form
+      <form
         action="javascript:void(0);"
         className=""
         onSubmit={handleSubmitMessage}
@@ -34,6 +33,7 @@ return(
           id="message"
           name="message"
           placeholder="Message"
+          className="textarea"
           value={messageInput}
           onChange={updateMessage}
         />
@@ -44,8 +44,6 @@ return(
           </button>
         </div>
       </form>
-
-
     </>
-)
+  );
 }
