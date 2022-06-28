@@ -29,7 +29,7 @@ export default function HomeBox({ startReady, room, user }) {
     e.preventDefault();
     socket.emit("sendData", room, user, players);
     socket.emit("navigateAllPlayers", room);
-    socket.emit("sendCatergory", catergoryInput);
+    socket.emit("sendCatergory", room, catergoryInput);
     navigate("/game", { replace: true });
   };
 
