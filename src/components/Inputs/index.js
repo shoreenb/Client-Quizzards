@@ -5,9 +5,11 @@ export default function Inputs() {
   const [usernameInput, setUsernameInput] = useState("");
   const [roomInput, setRoomInput] = useState("");
 
+  const [user, setUser] = useState("");
   const [room, setRoom] = useState("");
   const [roomLocked, setRoomLocked] = useState(false);
   const [userLocked, setUserLocked] = useState(true);
+  const [startReady, setStartReady] = useState(false);
 
   //Controlled forms
   const updateUsername = (e) => {
@@ -22,7 +24,7 @@ export default function Inputs() {
 
   const handleSubmitRoom = (e) => {
     e.preventDefault();
-
+    if (roomInput == "") return;
     let chosenRoom = roomInput;
     setRoom(chosenRoom);
     setRoomLocked(true);
@@ -34,10 +36,12 @@ export default function Inputs() {
   const handleSubmitUser = (e) => {
     e.preventDefault();
 
-    let user = usernameInput;
+    let chosenUser = usernameInput;
+    setUser(chosenUser);
     setUserLocked(true);
+    setStartReady(true);
     setUsernameInput("");
-    socket.emit("addUserPress", user, room);
+    socket.emit("addUserPress", chosenUser, room);
   };
 
   return (
@@ -88,7 +92,7 @@ export default function Inputs() {
         </div>
       </form>
 
-      <HomeBox />
+      <HomeBox startReady={startReady} room={room} user={user} />
     </>
   );
 }

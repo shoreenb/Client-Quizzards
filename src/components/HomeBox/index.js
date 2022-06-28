@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { socket } from "../../App";
 
-export default function HomeBox() {
+export default function HomeBox({ startReady, room, user }) {
   const [roomText, setRoomText] = useState("");
   const [players, setPlayers] = useState([]);
 
@@ -19,6 +19,7 @@ export default function HomeBox() {
 
   const handleSendData = (e) => {
     e.preventDefault();
+    socket.emit("sendData", room, user, players);
   };
 
   return (
@@ -37,7 +38,9 @@ export default function HomeBox() {
         </div>
       </div>
       <form action="javascript:void(0);" className="" onSubmit={handleSendData}>
-        <button type="submit">Start game!</button>
+        <button disabled={!startReady} type="submit">
+          Start game!
+        </button>
       </form>
     </>
   );
