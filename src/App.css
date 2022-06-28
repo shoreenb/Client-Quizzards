@@ -108,22 +108,50 @@ h1:hover {
 
   top: 20%;
   display: flex;
-  justify-content: space-around;
+  column-gap: 80px;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+.randomWord {
+  flex-basis: 100%;
+}
+.randomWordContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.gameTitle {
+  font-family: "Henny Penny", cursive;
+  font-size: 32px;
+  text-shadow: 10px 10px 8px rgba(255, 0, 0, 0.6),
+    15px 15px 8px rgba(0, 255, 0, 0.4), 5px 5px 8px rgba(0, 0, 255, 0.6);
+}
+.word {
+  font-size: 26px;
 }
 canvas {
   background-color: white;
 }
 .canvasApp {
-  flex-basis: 1;
+  /* flex-basis: 50%; */
 }
 
 .messageBoxComponent {
   width: 200px;
 }
 
+.UserComponent {
+  row-gap: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
 .userCardContainer {
+  /* flex-basis: 50%; */
   display: flex;
   flex-direction: column;
   row-gap: 20px;
@@ -155,7 +183,7 @@ canvas {
 }
 #message-container {
   width: 320px;
-  height: 600px;
+  height: 500px;
   padding: 10px;
   border: 5px solid gray;
   margin: 0;
