@@ -104,6 +104,9 @@ h1:hover {
   align-items: center;
   flex-wrap: wrap;
 }
+.randomWord {
+  flex-basis: 100%;
+}
 canvas {
   background-color: white;
 }

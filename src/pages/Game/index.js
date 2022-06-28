@@ -5,6 +5,7 @@ import {
   MessageBox,
   Users,
   Countdown,
+  RandomWord,
 } from "../../components";
 
 import "../../App.css";
@@ -14,6 +15,9 @@ const Game = () => {
     <>
       <div className="bkImgGame"></div>
       <div className="gamePageContainer">
+        <div className="randomWord">
+          <RandomWord />
+        </div>
         <div className="UserComponent">
           <Countdown />
           <Users />
