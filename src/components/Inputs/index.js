@@ -21,7 +21,7 @@ export default function Inputs() {
     const input = e.target.value;
     setRoomInput(input);
   };
-
+  //Pressing join room
   const handleSubmitRoom = (e) => {
     e.preventDefault();
     if (roomInput == "") return;
@@ -33,6 +33,17 @@ export default function Inputs() {
 
     socket.emit("joinRoomPress", chosenRoom);
   };
+
+  //If room is full
+
+  socket.on("maxPartyError", (room) => {
+    setRoom("");
+    setRoomLocked(false);
+    setUserLocked(true);
+    setRoomInput("");
+  });
+
+  //Press add username
   const handleSubmitUser = (e) => {
     e.preventDefault();
 
