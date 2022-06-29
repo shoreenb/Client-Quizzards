@@ -2,21 +2,12 @@ import React, { useState } from "react";
 import { socket } from "../../App";
 import ReactDOM from "react-dom";
 
-export default function MessageBox() {
+export default function MessageBox({ room, user, players }) {
   const [messageInput, setMessageInput] = useState("");
-  const [room, setRoom] = useState("");
-  const [user, setUser] = useState("");
-  const [players, setPlayers] = useState([]);
   const [messages, setMessages] = useState([]);
 
-  socket.on("recieveMessage", (messageData,roomData,userData) => {
-  setMessages([...messages, userData+ " : " +messageData]);
-  });
-
-  socket.on("recieveData", (roomData, userData, playersData) => {
-    setPlayers([...playersData]);
-    setRoom(roomData);
-    setUser(userData);
+  socket.on("recieveMessage", (messageData, roomData, userData) => {
+    setMessages([...messages, userData + " : " + messageData]);
   });
 
   const updateMessage = (e) => {
@@ -28,7 +19,7 @@ export default function MessageBox() {
     e.preventDefault();
 
     socket.emit("sendMessage", messageInput, room, user);
-      setMessages([...messages, user+ " : " + messageInput]);
+    setMessages([...messages, user + " : " + messageInput]);
   };
 
   return (
