@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap");
+
 @import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
+
 
 *,
 *::after,
@@ -23,6 +25,8 @@ body {
   opacity: 50%;
 }
 
+
+=======
 .bkImgGame {
   background-color: 101, 199, 179;
   background-image: url(./img/bk-img.jpg);
@@ -34,6 +38,7 @@ body {
   position: absolute;
   opacity: 50%;
 }
+
 
 .home {
   width: 100%;
@@ -48,8 +53,11 @@ body {
 h1 {
   font-family: "Henny Penny", cursive;
   font-size: 72px;
-  text-shadow: 10px 10px 8px rgba(255, 0, 0, 0.6),
-    15px 15px 8px rgba(0, 255, 0, 0.4), 5px 5px 8px rgba(0, 0, 255, 0.6);
+
+  text-shadow: 10px 10px 8px red, 15px 15px 8px green, 5px 5px 8px blue;
+
+  
+
 }
 
 h1:hover {
@@ -95,6 +103,8 @@ h1:hover {
   left: 50px;
   top: 50px;
 }
+
+
 
 /* Game Page */
 
@@ -177,15 +187,18 @@ canvas {
   /* margin-top: 3px; */
   margin-right: 22px;
 }
+
 #message-container {
   width: 320px;
   height: 500px;
   padding: 10px;
   border: 5px solid gray;
   margin: 0;
-  /* position: absolute;
+
+  position: absolute;
   right: 10px;
-  top: 50px; */
+  top: 50px;
+
 }
 
 #message-container div {
@@ -194,9 +207,11 @@ canvas {
 }
 
 #message-input {
-  /* position: absolute;
+
+  position: absolute;
   right: 150px;
-  bottom: 20px; */
+  bottom: 20px;
+
 }
 
 .join-btn,
@@ -261,4 +276,24 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+}
+
+.board-container {
+  width: 60vw;
+
+  height: 50vh;
+  margin-inline: auto;
+  background: white;
+  border: 1px solid black;
+}
+
+.board {
+  width: 100%;
+  height: 100%;
+}
+
+.sketch {
+  width: 100%;
+  height: 100%;
 }
