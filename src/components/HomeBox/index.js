@@ -69,9 +69,9 @@ export default function HomeBox({ startReady, room, user }) {
           value={catergoryInput}
           onChange={updateCatergory}
         >
-          <option value="animals">Animals</option>
-          <option value="food">Food</option>
-          <option value="drinks">Drinks</option>
+          <option value="Animals">Animals</option>
+          <option value="Food">Food</option>
+          <option value="Random">Random</option>
         </select>
         <button disabled={!startReady} type="submit">
           Start game!
