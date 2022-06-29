@@ -14,7 +14,7 @@ body {
   padding: 0;
 }
 
-#bkImg {
+#bkImg, .bkImgGame {
   background-image: url(./img/bk-img.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -24,21 +24,6 @@ body {
   position: absolute;
   opacity: 50%;
 }
-
-
-=======
-.bkImgGame {
-  background-color: 101, 199, 179;
-  background-image: url(./img/bk-img.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  position: absolute;
-  opacity: 50%;
-}
-
 
 .home {
   width: 100%;
