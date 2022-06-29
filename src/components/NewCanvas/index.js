@@ -1,20 +1,44 @@
 import React, { useState, useEffect, useRef } from "react";
 import { socket } from "../../App";
-import RandomWord from "../RandomWord";
+
 import blank from "../../img/blankImage";
 
-export default function NewCanvas({ room, user, players }) {
+export default function NewCanvas({
+  room,
+  user,
+  players,
+  activePlayer,
+  activePlayerTrue,
+}) {
   const [color, setColor] = useState("#000000");
   const [size, setSize] = useState("3");
   const [prevImage, setPrevImage] = useState("");
+  const [hardMode, setHardMode] = useState(true);
+  const [activeCanvas, setActiveCanvas] = useState(false);
   let ctx;
 
   useEffect(() => {
-    drawOnCanvas();
-    setCanvas(prevImage);
+    const canvas = document.querySelector("#board");
+    const ctx = canvas.getContext("2d");
+    const sketch = document.querySelector("#sketch");
+    const sketch_style = getComputedStyle(sketch);
+    canvas.width = parseInt(sketch_style.getPropertyValue("width"));
+    canvas.height = parseInt(sketch_style.getPropertyValue("height"));
+  }, []);
+
+  useEffect(() => {
+    setActiveCanvas(activePlayerTrue);
+    if (activeCanvas) {
+      drawOnCanvas();
+      if (hardMode) {
+        setCanvas(blank);
+      } else {
+        setCanvas(prevImage);
+      }
+    }
   });
 
-  function setCanvas(data = blank) {
+  function setCanvas(data) {
     let image = new Image();
     let canvas = document.querySelector("#board");
     ctx = canvas.getContext("2d");
@@ -102,8 +126,9 @@ export default function NewCanvas({ room, user, players }) {
         let base64ImageData = canvas.toDataURL("image/png");
 
         setPrevImage(base64ImageData);
+
         socket.emit("canvas-data", base64ImageData, room);
-      }, 500);
+      }, 750);
     };
   }
   return (
@@ -112,11 +137,15 @@ export default function NewCanvas({ room, user, players }) {
         <div className="tools-section">
           <div className="color-picker">
             Select Brush Color: &nbsp;
-            <input type="color" onChange={changeColor} />
+            <input
+              disabled={!activePlayerTrue}
+              type="color"
+              onChange={changeColor}
+            />
           </div>
           <div className="size-picker">
             Select Brush Size: &nbsp;
-            <select onChange={changeSize}>
+            <select disabled={!activePlayerTrue} onChange={changeSize}>
               <option> 3 </option>
               <option> 6 </option>
               <option> 9 </option>

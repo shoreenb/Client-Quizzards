@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function HomeBox({ startReady, room, user }) {
   const [roomText, setRoomText] = useState("");
   const [players, setPlayers] = useState([]);
+  const [host, setHost] = useState(false);
   const [catergoryInput, setCatergoryInput] = useState("animals");
 
   const navigate = useNavigate();
@@ -21,17 +22,22 @@ export default function HomeBox({ startReady, room, user }) {
   socket.on("addPlayer", (newPlayers, room) => {
     setPlayers([...newPlayers]);
   });
+  socket.on("addMe", (newPlayers, room, isHost) => {
+    setHost(isHost);
+
+    setPlayers([...newPlayers]);
+  });
 
   const handleSendData = (e) => {
     e.preventDefault();
-    socket.emit("sendData", room, user, players);
+    socket.emit("sendData", room, user, players, catergoryInput, host);
     socket.emit("navigateAllPlayers", room);
-    socket.emit("sendCatergory", room, catergoryInput);
+
     navigate("/game", { replace: true });
   };
 
   socket.on("navigateToGame", () => {
-    socket.emit("sendData", room, user, players);
+    socket.emit("sendData", room, user, players, catergoryInput, host);
     navigate("/game", { replace: true });
   });
 
@@ -74,7 +80,7 @@ export default function HomeBox({ startReady, room, user }) {
           <option value="Food">Food</option>
           <option value="Random">Random</option>
         </select>
-        <button className="start-btn" disabled={!startReady} type="submit">
+        <button className="start-btn" disabled={!host} type="submit">
           Start game!
         </button>
       </form>
