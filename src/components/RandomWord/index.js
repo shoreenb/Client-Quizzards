@@ -6,6 +6,7 @@ export default function RandomWord() {
   const [category, setCatergory] = useState("");
   const [data, setData] = useState("");
   const [word, setWord] = useState("");
+  const [maskedWord, setMaskedWord] = useState("");
   const [error, setError] = useState("");
 
   const [state, setState] = useState(false);
@@ -47,6 +48,7 @@ export default function RandomWord() {
     };
     randomWord(data.length, data);
   }, [state]);
+
   return (
     <div className="randomWordContainer">
       <div>
@@ -58,7 +60,11 @@ export default function RandomWord() {
       </div>
       <div>
         <button onClick={changeState}>Random Word</button>
-        <p className="word">{word ? word.word : "Somthing has gone wrong"}</p>
+        <p className="word">
+          {word
+            ? word.word.split("").fill("_").join(" ")
+            : "Press Start To Begin"}
+        </p>
       </div>
     </div>
   );
