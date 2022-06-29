@@ -1,18 +1,7 @@
 import React, { useState } from "react";
 import { socket } from "../../App";
 
-export default function Users() {
-  const [room, setRoom] = useState("");
-  const [user, setUser] = useState("");
-  const [players, setPlayers] = useState([]);
-  const [points, setPoints] = useState(0);
-
-  socket.on("recieveData", (room, user, players) => {
-    setRoom(room);
-    setUser(user);
-    setPlayers(players);
-  });
-
+export default function Users({ room, user, players, points }) {
   return (
     <>
       <div className="userCardContainer">

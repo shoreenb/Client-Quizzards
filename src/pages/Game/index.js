@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Canvas,
   DisplayBox,
@@ -7,10 +7,21 @@ import {
   Countdown,
   RandomWord,
 } from "../../components";
+import { socket } from "../../App";
 
 import "../../App.css";
 
 const Game = () => {
+  const [room, setRoom] = useState("");
+  const [user, setUser] = useState("");
+  const [players, setPlayers] = useState([]);
+  const [points, setPoints] = useState(0);
+
+  socket.on("recieveData", (room, user, players) => {
+    setRoom(room);
+    setUser(user);
+    setPlayers(players);
+  });
   return (
     <>
       <div className="bkImgGame"></div>
@@ -20,7 +31,7 @@ const Game = () => {
         </div>
         <div className="UserComponent">
           <Countdown />
-          <Users />
+          <Users room={room} user={user} players={players} points={points} />
         </div>
         <div className="canvasApp">
           <Canvas width={700} height={500} />
