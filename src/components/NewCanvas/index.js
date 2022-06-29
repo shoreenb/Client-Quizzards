@@ -13,7 +13,7 @@ export default function NewCanvas({
   const [color, setColor] = useState("#000000");
   const [size, setSize] = useState("3");
   const [prevImage, setPrevImage] = useState("");
-  const [hardMode, setHardMode] = useState(true);
+  const [hardMode, setHardMode] = useState(false);
   const [activeCanvas, setActiveCanvas] = useState(false);
   let ctx;
 
@@ -28,6 +28,7 @@ export default function NewCanvas({
 
   useEffect(() => {
     setActiveCanvas(activePlayerTrue);
+
     if (activeCanvas) {
       drawOnCanvas();
       if (hardMode) {
@@ -128,7 +129,7 @@ export default function NewCanvas({
         setPrevImage(base64ImageData);
 
         socket.emit("canvas-data", base64ImageData, room);
-      }, 750);
+      }, 1000);
     };
   }
   return (

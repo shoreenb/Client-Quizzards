@@ -31,8 +31,8 @@ const Game = () => {
       setHost(host);
     }
   );
-
   let activePlayers;
+
   setTimeout(() => {
     activePlayers = [...players];
   }, 1000);
@@ -61,8 +61,26 @@ const Game = () => {
     setActivePlayer(activePlayerChange);
   });
 
+  socket.on("recieveRemoveActivePlayer", (activePlayer) => {
+    if (user == activePlayer) {
+      setActivePlayerTrue(false);
+    }
+  });
+
   const getNextPlayer = () => {
-    const randomPlayer = Math.floor(Math.random() * activePlayers.lenth);
+    if (activePlayers.length == 1) {
+      setActivePlayer(activePlayers[0]);
+    }
+    if (activePlayers.length == 0) {
+      //Navigate here
+    }
+
+    const randomPlayer =
+      activePlayers[Math.floor(Math.random() * activePlayers.length)];
+    if (user == activePlayer) {
+      setActivePlayerTrue(false);
+    }
+    socket.emit("sendRemoveActivePlayer", activePlayer, room);
     setActivePlayer(randomPlayer);
     activePlayers.splice(activePlayers.indexOf(randomPlayer), 1);
   };
@@ -72,7 +90,11 @@ const Game = () => {
     <>
       <div className="bkImgGame"></div>
       <div className="randomWord">
-        <RandomWord catergoryChoice={catergory} />
+        <button onClick={getNextPlayer}>Press me</button>
+        <RandomWord
+          catergoryChoice={catergory}
+          activePlayerTrue={activePlayerTrue}
+        />
       </div>
       <div className="gamePageContainer">
         <div className="UserComponent">
