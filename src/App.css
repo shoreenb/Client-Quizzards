@@ -9,12 +9,16 @@
 }
 
 body {
+  margin-top: 10rem;
+  width: 100vw;
   margin: 0;
   padding: 0;
+  position: relative;
+  overflow-x: hidden;
 }
 
-#bkImg,
-.bkImgGame {
+
+#bkImg, .bkImgGame {
   background-image: url(./img/bk-img.jpg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -36,11 +40,12 @@ body {
 }
 
 h1 {
+  margin-top: 10rem;
   font-family: "Henny Penny", cursive;
   font-size: 72px;
-
   text-shadow: 10px 10px 8px rgba(255, 0, 0, 0.6),
     15px 15px 8px rgba(0, 255, 0, 0.4), 5px 5px 8px rgba(0, 0, 255, 0.6);
+
 }
 
 h1:hover {
@@ -121,9 +126,6 @@ h1:hover {
 }
 canvas {
   background-color: white;
-}
-.canvasApp {
-  /* flex-basis: 50%; */
 }
 
 .messageBoxComponent {
@@ -237,6 +239,14 @@ select {
   padding: 5px 10px;
 }
 
+select {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
 .start-btn {
   border-radius: 8px;
   background-color: #4caf50;
@@ -257,20 +267,35 @@ select {
 }
 
 .board-container {
-  width: 60vw;
+  width: 600px;
 
-  height: 50vh;
+  height: 400px;
   margin-inline: auto;
   background: white;
   border: 1px solid black;
-}
-
-.board {
-  width: 100%;
-  height: 100%;
 }
 
 .sketch {
   width: 100%;
   height: 100%;
 }
+.board {
+  width: 100%;
+  height: 100%;
+}
+
+.tools-section {
+  width: 100%;
+  display: flex;
+  position: absolute;
+  bottom: -4rem;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-inline: auto;
+}
+/* .color-picker {
+}
+
+.size-picker {
+} */
