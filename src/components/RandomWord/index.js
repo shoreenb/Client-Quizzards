@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { socket } from "../../App";
 import axios from "axios";
 
@@ -10,18 +10,19 @@ export default function RandomWord() {
     console.log("Hello from rC", catergoryInput);
     setCatergory(catergoryInput);
   });
-
-  const getWords = async (category) => {
-    try {
-      const data = await axios.get(
-        `https://quizzards-the-game.herokuapp.com/${category}`
-      );
-      console.log(data);
-    } catch (err) {
-      setError(err);
-    }
-  };
-
+  useEffect(() => {
+    const getWords = async (category) => {
+      try {
+        const data = await axios.get(
+          `https://quizzards-the-game.herokuapp.com/${category}`
+        );
+        console.log(data);
+      } catch (err) {
+        setError(err);
+      }
+    };
+    getWords(category);
+  }, [category]);
   return (
     <div className="randomWordContainer">
       <div>
