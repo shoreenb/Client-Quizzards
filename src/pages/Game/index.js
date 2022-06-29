@@ -17,11 +17,12 @@ const Game = () => {
   const [players, setPlayers] = useState([]);
   const [points, setPoints] = useState(0);
 
-  socket.on("recieveData", (room, user, players) => {
-    setRoom(room);
-    setUser(user);
-    setPlayers(players);
+  socket.on("recieveData", (roomData, userData, playersData) => {
+    setPlayers([...playersData]);
+    setRoom(roomData);
+    setUser(userData);
   });
+
   return (
     <>
       <div className="bkImgGame"></div>
@@ -37,7 +38,7 @@ const Game = () => {
           <Canvas width={700} height={500} />
         </div>
         <div className="messageBoxComponent">
-          <MessageBox />
+          <MessageBox room={room} user={user} players={players} />
         </div>
       </div>
     </>
