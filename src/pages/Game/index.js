@@ -8,6 +8,7 @@ import {
   RandomWord,
 } from "../../components";
 import { socket } from "../../App";
+import axios from "axios";
 
 import "../../App.css";
 import { io } from "socket.io-client";
@@ -21,6 +22,8 @@ const Game = () => {
   const [points, setPoints] = useState(0);
   const [activePlayer, setActivePlayer] = useState("");
   const [activePlayerTrue, setActivePlayerTrue] = useState(false);
+  const [allWords, setAllWords] = useState("");
+  const [error, setError] = useState("");
 
   socket.on(
     "recieveData",
@@ -87,14 +90,40 @@ const Game = () => {
   };
   /* setActivePlayer(activePlayers.findIndex); */
 
+  ////////  RandomWord
+
+  useEffect(() => {
+    const getWords = async (catergory) => {
+      if (catergory) {
+        try {
+          const { data } = await axios.get(
+            `https://quizzards-the-game.herokuapp.com/${catergory}`
+          );
+          setAllWords(data);
+        } catch (err) {
+          setError(err);
+        }
+      }
+    };
+    getWords(catergory);
+  }, [catergory]);
+
+  useEffect(() => {
+    if (allWords) {
+      socket.emit("sendAllWords", allWords, room);
+    }
+  }, [allWords]);
+
   return (
     <>
       <div className="bkImgGame"></div>
       <div className="randomWord">
         <button onClick={getNextPlayer}>Press me</button>
         <RandomWord
+          error={error}
           catergoryChoice={catergory}
           activePlayerTrue={activePlayerTrue}
+          room={room}
         />
       </div>
       <div className="gamePageContainer">
