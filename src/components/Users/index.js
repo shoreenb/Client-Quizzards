@@ -13,8 +13,6 @@ export default function Users() {
     setPlayers(players);
   });
 
-  console.log(room, user, players);
-
   return (
     <>
       <div className="userCardContainer">
