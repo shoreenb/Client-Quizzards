@@ -9,7 +9,6 @@ const Home = () => {
         <h1>What's My Doodle?</h1>
         <Inputs />
       </div>
-      <NewCanvas />
     </>
   );
 };

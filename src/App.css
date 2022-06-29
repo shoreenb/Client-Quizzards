@@ -2,7 +2,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
 
-
 *,
 *::after,
 *::before {
@@ -10,8 +9,12 @@
 }
 
 body {
+  margin-top: 10rem;
+  width: 100vw;
   margin: 0;
   padding: 0;
+  position: relative;
+  overflow-x: hidden;
 }
 
 #bkImg {
@@ -25,8 +28,6 @@ body {
   opacity: 50%;
 }
 
-
-=======
 .bkImgGame {
   background-color: 101, 199, 179;
   background-image: url(./img/bk-img.jpg);
@@ -39,7 +40,6 @@ body {
   opacity: 50%;
 }
 
-
 .home {
   width: 100%;
   height: 100vh;
@@ -51,13 +51,11 @@ body {
 }
 
 h1 {
+  margin-top: 10rem;
   font-family: "Henny Penny", cursive;
   font-size: 72px;
 
   text-shadow: 10px 10px 8px red, 15px 15px 8px green, 5px 5px 8px blue;
-
-  
-
 }
 
 h1:hover {
@@ -104,8 +102,6 @@ h1:hover {
   top: 50px;
 }
 
-
-
 /* Game Page */
 
 .gamePageContainer {
@@ -140,9 +136,6 @@ h1:hover {
 }
 canvas {
   background-color: white;
-}
-.canvasApp {
-  /* flex-basis: 50%; */
 }
 
 .messageBoxComponent {
@@ -198,7 +191,6 @@ canvas {
   position: absolute;
   right: 10px;
   top: 50px;
-
 }
 
 #message-container div {
@@ -207,11 +199,9 @@ canvas {
 }
 
 #message-input {
-
   position: absolute;
   right: 150px;
   bottom: 20px;
-
 }
 
 .join-btn,
@@ -259,6 +249,14 @@ select {
   padding: 5px 10px;
 }
 
+select {
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
 .start-btn {
   border-radius: 8px;
   background-color: #4caf50;
@@ -276,24 +274,38 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .board-container {
-  width: 60vw;
+  width: 600px;
 
-  height: 50vh;
+  height: 400px;
   margin-inline: auto;
   background: white;
   border: 1px solid black;
-}
-
-.board {
-  width: 100%;
-  height: 100%;
 }
 
 .sketch {
   width: 100%;
   height: 100%;
 }
+.board {
+  width: 100%;
+  height: 100%;
+}
+
+.tools-section {
+  width: 100%;
+  display: flex;
+  position: absolute;
+  bottom: -4rem;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-inline: auto;
+}
+/* .color-picker {
+}
+
+.size-picker {
+} */
