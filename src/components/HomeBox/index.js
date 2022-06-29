@@ -5,12 +5,17 @@ import { useNavigate } from "react-router-dom";
 export default function HomeBox({ startReady, room, user }) {
   const [roomText, setRoomText] = useState("");
   const [players, setPlayers] = useState([]);
+  const [catergoryInput, setCatergoryInput] = useState("animals");
 
   const navigate = useNavigate();
 
   socket.on("attachRoom", (room) => {
     setRoomText(room);
     /* playersArea.textContent = socket.id; */
+  });
+
+  socket.on("maxPartyError", (room) => {
+    setRoomText(`The maxed room size for ${room} has been reached!`);
   });
 
   socket.on("addPlayer", (newPlayers, room) => {
@@ -24,6 +29,7 @@ export default function HomeBox({ startReady, room, user }) {
     e.preventDefault();
     socket.emit("sendData", room, user, players);
     socket.emit("navigateAllPlayers", room);
+    socket.emit("sendCatergory", room, catergoryInput);
     navigate("/game", { replace: true });
   };
 
@@ -32,13 +38,20 @@ export default function HomeBox({ startReady, room, user }) {
     navigate("/game", { replace: true });
   });
 
+  // Category Select
+
+  const updateCatergory = (e) => {
+    const input = e.target.value;
+    setCatergoryInput(input);
+  };
+
   return (
     <>
       <div className="home-box">
         <p className="connection"></p>
         <h3>Room Name:</h3>
         <div className="room">{roomText}</div>
-        <h3>Players</h3>
+        <h3>Players:</h3>
         <div className="players">
           {players.map((player) => (
             <div key={player + Math.floor(Math.random() * 10 + 1)}>
@@ -47,8 +60,24 @@ export default function HomeBox({ startReady, room, user }) {
           ))}
         </div>
       </div>
-      <form action="javascript:void(0);" className="" onSubmit={handleSendData}>
-        <button disabled={!startReady} type="submit">
+      <form
+        action="javascript:void(0);"
+        className="catergory-form"
+        onSubmit={handleSendData}
+      >
+        <label htmlFor="category"></label>
+        <select
+          id="category"
+          name="category"
+          className="select-box"
+          value={catergoryInput}
+          onChange={updateCatergory}
+        >
+          <option value="Animals">Animals</option>
+          <option value="Food">Food</option>
+          <option value="Random">Random</option>
+        </select>
+        <button className="start-btn" disabled={!startReady} type="submit">
           Start game!
         </button>
       </form>

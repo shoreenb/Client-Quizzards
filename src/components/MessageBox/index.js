@@ -9,8 +9,8 @@ export default function MessageBox() {
   const [players, setPlayers] = useState([]);
   const [messages, setMessages] = useState([]);
 
-  socket.on("recieveMessage,", (message) => {
-    setMessages([...messages, message]);
+  socket.on("recieveMessage", (messageData,roomData,userData) => {
+  setMessages([...messages, userData+ " : " +messageData]);
   });
 
   socket.on("recieveData", (roomData, userData, playersData) => {
@@ -28,7 +28,7 @@ export default function MessageBox() {
     e.preventDefault();
 
     socket.emit("sendMessage", messageInput, room, user);
-    setMessages([...messages, messageInput]);
+      setMessages([...messages, user+ " : " + messageInput]);
   };
 
   return (
@@ -53,6 +53,7 @@ export default function MessageBox() {
           id="message"
           name="message"
           placeholder="Message"
+          className="textarea"
           value={messageInput}
           onChange={updateMessage}
         />
