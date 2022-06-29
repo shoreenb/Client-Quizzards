@@ -4,25 +4,34 @@ import axios from "axios";
 
 export default function RandomWord() {
   const [category, setCatergory] = useState("");
+
+  const [data, setData] = useState("");
   const [error, setError] = useState("");
 
   socket.on("recieveCatergory", (room, catergoryInput) => {
     console.log("Hello from rC", catergoryInput);
     setCatergory(catergoryInput);
   });
+
+  // Getting length of catergory array
   useEffect(() => {
     const getWords = async (category) => {
-      try {
-        const data = await axios.get(
-          `https://quizzards-the-game.herokuapp.com/${category}`
-        );
-        console.log(data);
-      } catch (err) {
-        setError(err);
+      if (category) {
+        try {
+          const { data } = await axios.get(
+            `https://quizzards-the-game.herokuapp.com/${category}`
+          );
+          setData(data);
+        } catch (err) {
+          setError(err);
+        }
       }
     };
     getWords(category);
   }, [category]);
+
+  console.log(data);
+
   return (
     <div className="randomWordContainer">
       <div>
