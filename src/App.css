@@ -2,7 +2,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
 
-
 *,
 *::after,
 *::before {
@@ -25,8 +24,6 @@ body {
   opacity: 50%;
 }
 
-
-=======
 .bkImgGame {
   background-color: 101, 199, 179;
   background-image: url(./img/bk-img.jpg);
@@ -38,7 +35,6 @@ body {
   position: absolute;
   opacity: 50%;
 }
-
 
 .home {
   width: 100%;
@@ -55,9 +51,6 @@ h1 {
   font-size: 72px;
 
   text-shadow: 10px 10px 8px red, 15px 15px 8px green, 5px 5px 8px blue;
-
-  
-
 }
 
 h1:hover {
@@ -103,8 +96,6 @@ h1:hover {
   left: 50px;
   top: 50px;
 }
-
-
 
 /* Game Page */
 
@@ -198,7 +189,6 @@ canvas {
   position: absolute;
   right: 10px;
   top: 50px;
-
 }
 
 #message-container div {
@@ -207,11 +197,9 @@ canvas {
 }
 
 #message-input {
-
   position: absolute;
   right: 150px;
   bottom: 20px;
-
 }
 
 .join-btn,
@@ -276,7 +264,6 @@ select {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
 .board-container {
