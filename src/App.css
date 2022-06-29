@@ -236,7 +236,8 @@ button:hover {
   }
 }
 
-input {
+input,
+select {
   border-radius: 4px;
   font-family: "Gloria Hallelujah", cursive;
   border: solid 1px rgba(0, 0, 0, 0.5);
@@ -248,9 +249,16 @@ input {
   background-color: #4caf50;
   border: none;
   padding: 10px 24px;
-  width: 100%;
+  width: 300px;
   font-family: "Gloria Hallelujah", cursive;
+  margin-top: 10px;
 }
 .start-btn:disabled {
   background-color: #bc9e8b;
+}
+.catergory-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

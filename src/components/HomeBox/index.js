@@ -60,12 +60,16 @@ export default function HomeBox({ startReady, room, user }) {
           ))}
         </div>
       </div>
-      <form action="javascript:void(0);" className="" onSubmit={handleSendData}>
-        <label htmlFor="category">Choose a category</label>
+      <form
+        action="javascript:void(0);"
+        className="catergory-form"
+        onSubmit={handleSendData}
+      >
+        <label htmlFor="category"></label>
         <select
           id="category"
           name="category"
-          className="textarea"
+          className="select-box"
           value={catergoryInput}
           onChange={updateCatergory}
         >
