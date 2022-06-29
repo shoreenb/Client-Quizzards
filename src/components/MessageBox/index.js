@@ -6,7 +6,7 @@ export default function MessageBox({ room, user, players }) {
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([]);
 
-  socket.on("recieveMessage", (messageData, userData) => {
+  socket.on("recieveMessage", (messageData, room, userData) => {
     setMessages([userData + " : " + messageData, ...messages]);
   });
 
