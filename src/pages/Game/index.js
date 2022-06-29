@@ -50,7 +50,6 @@ const Game = () => {
   }, [activePlayer]);
 
   useEffect(() => {
-    console.log(user, activePlayer);
     if (activePlayer != "") {
       if (user === activePlayer) {
         setActivePlayerTrue(true);
@@ -60,7 +59,6 @@ const Game = () => {
 
   socket.on("recieveActivePlayerChange", (activePlayerChange) => {
     setActivePlayer(activePlayerChange);
-    console.log(activePlayerChange);
   });
 
   const getNextPlayer = () => {
