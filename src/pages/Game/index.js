@@ -10,6 +10,7 @@ import {
 import { socket } from "../../App";
 
 import "../../App.css";
+import { io } from "socket.io-client";
 
 const Game = () => {
   const [room, setRoom] = useState("");
