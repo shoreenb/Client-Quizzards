@@ -44,7 +44,6 @@ export default function RandomWord() {
     const randomWord = (int, data) => {
       const randomInt = Math.floor(Math.random() * int);
       setWord(data[randomInt]);
-      // console.log(randomInt);
     };
     randomWord(data.length, data);
   }, [state]);

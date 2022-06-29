@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { socket } from "../../App";
+import RandomWord from "../RandomWord";
 import blank from "../../img/blankImage";
 
 export default function NewCanvas({ room, user, players }) {
@@ -43,8 +44,6 @@ export default function NewCanvas({ room, user, players }) {
       ctx.drawImage(image, 0, 0);
     };
   });
-
-  console.log(prevImage);
 
   function drawOnCanvas() {
     const canvas = document.querySelector("#board");
@@ -109,28 +108,26 @@ export default function NewCanvas({ room, user, players }) {
   }
   return (
     <>
-      <div className="container-board">
-        <div className="board-container">
-          <div className="tools-section">
-            <div className="color-picker">
-              Select Brush Color: &nbsp;
-              <input type="color" onChange={changeColor} />
-            </div>
-            <div className="size-picker">
-              Select Brush Size: &nbsp;
-              <select onChange={changeSize}>
-                <option> 3 </option>
-                <option> 6 </option>
-                <option> 9 </option>
-                <option> 12 </option>
-                <option> 15 </option>
-              </select>
-            </div>
+      <div className="board-container">
+        <div className="tools-section">
+          <div className="color-picker">
+            Select Brush Color: &nbsp;
+            <input type="color" onChange={changeColor} />
           </div>
+          <div className="size-picker">
+            Select Brush Size: &nbsp;
+            <select onChange={changeSize}>
+              <option> 3 </option>
+              <option> 6 </option>
+              <option> 9 </option>
+              <option> 12 </option>
+              <option> 15 </option>
+            </select>
+          </div>
+        </div>
 
-          <div id="sketch" className="sketch">
-            <canvas className="board" id="board"></canvas>
-          </div>
+        <div id="sketch" className="sketch">
+          <canvas className="board" id="board"></canvas>
         </div>
       </div>
     </>

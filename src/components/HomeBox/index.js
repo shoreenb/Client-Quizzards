@@ -21,9 +21,6 @@ export default function HomeBox({ startReady, room, user }) {
   socket.on("addPlayer", (newPlayers, room) => {
     setPlayers([...newPlayers]);
   });
-  window.addEventListener("load", (event) => {
-    console.log("page is fully loaded");
-  });
 
   const handleSendData = (e) => {
     e.preventDefault();

@@ -1,4 +1,3 @@
-export { default as Canvas } from "./Canvas";
 export { default as Countdown } from "./Countdown";
 export { default as Room } from "./Room";
 export { default as Users } from "./Users";
@@ -9,4 +8,3 @@ export { default as NewCanvas } from "./NewCanvas";
 
 export { default as DisplayBox } from "./DisplayBox";
 export { default as RandomWord } from "./RandomWord";
-
