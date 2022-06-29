@@ -1,7 +1,7 @@
 import Homebox from ".";
 import { screen, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { screen } from ‘@testing-library/react’;
+import { screen } from '@testing-library/react';
 
 
 
