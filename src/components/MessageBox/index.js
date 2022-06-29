@@ -17,9 +17,11 @@ export default function MessageBox({ room, user, players }) {
 
   const handleSubmitMessage = (e) => {
     e.preventDefault();
-
-    socket.emit("sendMessage", messageInput, room, user);
-    setMessages([...messages, user + " : " + messageInput]);
+    if (messageInput != "") {
+      socket.emit("sendMessage", messageInput, room, user);
+      setMessages([...messages, user + " : " + messageInput]);
+      setMessageInput("");
+    }
   };
 
   return (
@@ -30,31 +32,28 @@ export default function MessageBox({ room, user, players }) {
             <div key={message}>{message}</div>
           ))}
         </div>
-      </div>
 
-      <form
-        id="message-input"
-        action="javascript:void(0);"
-        className=""
-        onSubmit={handleSubmitMessage}
-      >
-        <label htmlFor="message"></label>
-        <input
-          type="text"
-          id="message"
-          name="message"
-          placeholder="Message"
-          className="textarea"
-          value={messageInput}
-          onChange={updateMessage}
-        />
+        <form
+          id="message-input"
+          action="javascript:void(0);"
+          onSubmit={handleSubmitMessage}
+        >
+          <label htmlFor="message"></label>
+          <input
+            type="text"
+            id="message"
+            name="message"
+            placeholder="Whats your guess?"
+            className="textarea"
+            value={messageInput}
+            onChange={updateMessage}
+          />
 
-        <div className="form-nav">
           <button type="submit" className="send-message-btn">
-            Send Message
+            Guess!
           </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </>
   );
 }

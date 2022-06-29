@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  Canvas,
+  NewCanvas,
   DisplayBox,
   MessageBox,
   Users,
@@ -26,20 +26,19 @@ const Game = () => {
   return (
     <>
       <div className="bkImgGame"></div>
+      <div className="randomWord">
+        <RandomWord />
+      </div>
       <div className="gamePageContainer">
-        <div className="randomWord">
-          <RandomWord />
-        </div>
         <div className="UserComponent">
           <Countdown />
           <Users room={room} user={user} players={players} points={points} />
         </div>
-        <div className="canvasApp">
-          <Canvas width={700} height={500} />
+        <div className="canvas-container">
+          <NewCanvas room={room} user={user} players={players} />
         </div>
-        <div className="messageBoxComponent">
-          <MessageBox room={room} user={user} players={players} />
-        </div>
+
+        <MessageBox room={room} user={user} players={players} />
       </div>
     </>
   );
