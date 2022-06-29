@@ -4,16 +4,17 @@ import axios from "axios";
 
 export default function RandomWord() {
   const [category, setCatergory] = useState("");
-
   const [data, setData] = useState("");
+  const [word, setWord] = useState("");
   const [error, setError] = useState("");
 
+  const [state, setState] = useState(false);
+
   socket.on("recieveCatergory", (room, catergoryInput) => {
-    console.log("Hello from rC", catergoryInput);
     setCatergory(catergoryInput);
   });
 
-  // Getting length of catergory array
+  // Getting data of catergory array
   useEffect(() => {
     const getWords = async (category) => {
       if (category) {
@@ -30,8 +31,22 @@ export default function RandomWord() {
     getWords(category);
   }, [category]);
 
-  console.log(data);
+  const changeState = () => {
+    if (state) {
+      setState(false);
+    } else {
+      setState(true);
+    }
+  };
 
+  useEffect(() => {
+    const randomWord = (int, data) => {
+      const randomInt = Math.floor(Math.random() * int);
+      setWord(data[randomInt]);
+      // console.log(randomInt);
+    };
+    randomWord(data.length, data);
+  }, [state]);
   return (
     <div className="randomWordContainer">
       <div>
@@ -42,8 +57,10 @@ export default function RandomWord() {
         )}
       </div>
       <div>
-        <p className="word"> Word That has to be blurred</p>
+        <button onClick={changeState}>Random Word</button>
+        <p className="word">{word ? word.word : "Somthing has gone wrong"}</p>
       </div>
     </div>
   );
 }
+// randomWord(data.length, data)
