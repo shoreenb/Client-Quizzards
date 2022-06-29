@@ -251,3 +251,6 @@ input {
   width: 100%;
   font-family: "Gloria Hallelujah", cursive;
 }
+.start-btn:disabled {
+  background-color: #bc9e8b;
+}

@@ -73,7 +73,7 @@ export default function HomeBox({ startReady, room, user }) {
           <option value="Food">Food</option>
           <option value="Random">Random</option>
         </select>
-        <button disabled={!startReady} type="submit">
+        <button className="start-btn" disabled={!startReady} type="submit">
           Start game!
         </button>
       </form>
