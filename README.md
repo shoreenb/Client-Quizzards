@@ -1,68 +1,146 @@
-# Getting Started with Create React App
+# Quizzards Client 
 
-## Available Scripts
+<div id="top"></div>
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#process">Process</a></li>
+      </ul>
+    </li>
+    <li>
+       <a href="#built-with">Build With</a>
+       </li>
+    <li>
+       <a href="#functionality">Functionality</a>
+       </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation-and-usage">Installation and Usage</a></li>
+      </ul>
+    </li>
+    <li><a href="#contributors">Contributors</a></li>
+  </ol>
+</details>
 
-In the project directory, you can run:
+---
 
-### `npm start`
+<!-- ABOUT THE PROJECT -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## About The Project
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Remote Hosting
 
-### `npm test`
+The client side user interface is hosted [here]() on Netlify
+and Server side API is hosted [here]() on Heroku.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Process
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Planning: Listing all features and brainstorming a design.
+- Morning meetings to set daily goals & short Zoom meeting throughout the day to follow up progress.
+- Good workflow within a team, working in pairs on front-end and back-end.
+- Divide tasks and support each other.
+- Final styling, debugging and testing.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<!-- BUILT WITH -->
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Built With
 
-### `npm run eject`
+## Frontend Technologies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![HTML5](https://img.shields.io/badge/-HTML5-%23E44D27?style=flat-square&logo=html5&logoColor=ffffff)
+![CSS3](https://img.shields.io/badge/-CSS3-%231572B6?style=flat-square&logo=css3)
+![JavaScript](https://img.shields.io/badge/-JavaScript-%23F7DF1C?style=flat-square&logo=javascript&logoColor=000000&labelColor=%23F7DF1C&color=%23FFCE5A)
+![React](https://img.shields.io/badge/-ReactJs-61DAFB?logo=react)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Planning
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- [Excalidraw](https://www.Excalidraw.com/)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Backend Packages
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [NodeJS](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
+- [Cors](https://expressjs.com/en/resources/middleware/cors.html)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Testing
 
-### Code Splitting
+- [Jest](https://jestjs.io/)
+- [Supertest](https://github.com/visionmedia/supertest)
+- [jsdom](https://jestjs.io/docs/tutorial-jquery)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Development
 
-### Analyzing the Bundle Size
+- [Nodemon](https://www.npmjs.com/package/nodemon)
+- [Watchify](https://www.npmjs.com/package/watchify)
+- [Concurrently](https://www.npmjs.com/package/concurrently)
+- [Browserfy](https://www.npmjs.com/package/browserify)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### API's
 
-### Making a Progressive Web App
+- [Heroku](https://www.heroku.com/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<!-- FUCNTIONALITY -->
 
-### Deployment
+## Functionality
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<!-- GETTING STARTED -->
+
+# Getting Started
+
+### Remote Hosting
+
+The site is hosted [here] on Netlify
+and our API is hosted [here] on Heroku.
+
+<!-- INSTALLATION/USAGE EXAMPLES/TESTING -->
+
+# Installation and Usage
+
+
+Please follow instructions on installing and setting up this app. Ensure to have server running to run application.
+
+1. Fork or clone the repo and move into the folder
+2. In the command line run the following script to launch the server `npm run start`
+
+
+Test:
+
+- Run tests with `npm run test` and 
+- Check test coverage with `npm test -- --coverage`.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+---
+
+<!-- CONTACT/CONTRIBUTORS -->
+
+## Contributors
+
+Group project done by:
+
+- <a href="https://github.com/alihamedali96">Ali Hamed</a>
+- <a href="https://github.com/aha000111"> Amir Ali</a>
+- <a href="https://github.com/SamHardiment">Sam Hardiment</a>
+- <a href="https://github.com/shoreenb">Shoreen Beckford</a>
+- <a href="https://github.com/Izgardon">William Sessions</a>
+
+
+Project Link: [Server](https://github.com/SamHardiment/ServerQuizzards)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+---
