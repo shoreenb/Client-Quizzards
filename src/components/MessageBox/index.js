@@ -34,7 +34,7 @@ export default function MessageBox({ room, user, players }) {
         let correctGuess = messageInput.split("").fill("*").join(" ");
         socket.emit("sendMessage", correctGuess, room, user);
         setMessages([...messages, user + " : " + correctGuess]);
-        socket.emit("pointChange", room, user);
+        socket.emit("sendPointChange", room, user);
       } else {
         socket.emit("sendMessage", messageInput, room, user);
         setMessages([...messages, user + " : " + messageInput]);
