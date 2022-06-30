@@ -1,10 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { socket } from "../../App";
+import { Modal, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function RandomWord({ catergoryChoice, error, room }) {
+export default function RandomWord({
+  error,
+  catergoryChoice,
+  activePlayerTrue,
+  room,
+}) {
   const [word, setWord] = useState("");
   const [allWords, setAllWords] = useState("");
   const [catergory, setCatergory] = useState("");
+  const [isOpen, setIsOpen] = useState(true);
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const hideModal = () => {
+    setIsOpen(false);
+  };
 
   socket.on("recieveAllWords", (data) => {
     setAllWords(data);
@@ -25,27 +41,40 @@ export default function RandomWord({ catergoryChoice, error, room }) {
     socket.emit("sendRandomWord", randomWord, room);
 
     setWord(randomWord);
+    hideModal();
   };
 
   socket.on("recieveRandomWord", (randomWord) => {
     setWord(randomWord);
+    hideModal();
     // setCatergory(catergoryChoice);
   });
 
   return (
-    <div className="randomWordContainer">
-      <div>
-        {error ? (
-          <h3>{error}</h3>
-        ) : (
-          <h3 className="gameTitle">Catergory: {catergory}</h3>
-        )}
-      </div>
-      <div>
-        <button onClick={handleNewWord}>Random Word</button>
+    <>
+      <div className="randomWordContainer">
+        <div>
+          {error ? (
+            <h3>{error}</h3>
+          ) : (
+            <h3 className="gameTitle">Catergory: {catergory}</h3>
+          )}
+        </div>
         <p className="word">{word ? word : "Press Start To Begin"}</p>
       </div>
-    </div>
+      <Modal show={isOpen} onHide={hideModal}>
+        <Modal.Header>
+          {activePlayerTrue ? "Start Round!" : "Wait for game to begin"}
+        </Modal.Header>
+        <Modal.Body>
+          {activePlayerTrue ? (
+            <button onClick={handleNewWord}>Random Word</button>
+          ) : (
+            ""
+          )}
+        </Modal.Body>
+      </Modal>
+    </>
   );
 }
 // randomWord(data.length, data)
