@@ -93,19 +93,23 @@ const Game = () => {
   ////////  RandomWord
 
   useEffect(() => {
-    const getWords = async (catergory) => {
-      if (catergory) {
-        try {
-          const { data } = await axios.get(
-            `https://quizzards-the-game.herokuapp.com/${catergory}`
-          );
-          setAllWords(data);
-        } catch (err) {
-          setError(err);
+    if (host) {
+      const getWords = async (catergory) => {
+        if (catergory) {
+          try {
+            const { data } = await axios.get(
+              `https://quizzards-the-game.herokuapp.com/${catergory}`
+            );
+            setAllWords(data);
+            socket.emit("sendCatergory", catergory, room);
+            socket.emit("sendCatergoryHost", catergory, room);
+          } catch (err) {
+            setError(err);
+          }
         }
-      }
-    };
-    getWords(catergory);
+      };
+      getWords(catergory);
+    }
   }, [catergory]);
 
   useEffect(() => {

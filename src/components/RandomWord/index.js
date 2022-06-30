@@ -4,35 +4,35 @@ import { socket } from "../../App";
 export default function RandomWord({ catergoryChoice, error, room }) {
   const [word, setWord] = useState("");
   const [allWords, setAllWords] = useState("");
-  // const [maskedWord, setMaskedWord] = useState("");
-  // const [state, setState] = useState(false);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (allWords) {
-  //       console.log(allWords);
-  //       setWord(allWords[[Math.floor(Math.random() * allWords.length)]]);
-  //       console.log(word);
-  //     }
-  //   }, 1000);
-  // }, [state]);
-
-  // const stateChange = () => {
-  //   setState(!state);
-  // };
+  const [catergory, setCatergory] = useState("");
 
   socket.on("recieveAllWords", (data) => {
     setAllWords(data);
   });
 
+  socket.on("recieveCatergory", (catergoryChoice) => {
+    setCatergory(catergoryChoice);
+  });
+
+  socket.on("recieveCatergoryHost", (catergoryChoice, room) => {
+    console.log(catergoryChoice);
+    setCatergory(catergoryChoice);
+  });
+
   const handleNewWord = () => {
     const wordObj = allWords[[Math.floor(Math.random() * allWords.length)]];
-    console.log(wordObj);
-
+    // setWord visible to only active player --> send masked word to everyone else
     const randomWord = wordObj.word;
+    socket.emit("sendRandomWord", randomWord, room);
+
     setWord(randomWord);
   };
   console.log(allWords);
+
+  socket.on("recieveRandomWord", (randomWord) => {
+    setWord(randomWord);
+    // setCatergory(catergoryChoice);
+  });
 
   return (
     <div className="randomWordContainer">
@@ -40,7 +40,7 @@ export default function RandomWord({ catergoryChoice, error, room }) {
         {error ? (
           <h3>{error}</h3>
         ) : (
-          <h3 className="gameTitle">Catergory: {catergoryChoice}</h3>
+          <h3 className="gameTitle">Catergory: {catergory}</h3>
         )}
       </div>
       <div>
