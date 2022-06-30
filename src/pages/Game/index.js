@@ -22,6 +22,7 @@ const Game = () => {
   const [points, setPoints] = useState(0);
   const [activePlayer, setActivePlayer] = useState("");
   const [activePlayerTrue, setActivePlayerTrue] = useState(false);
+  const [activePlayers, setActivePlayers] = useState([]);
   const [allWords, setAllWords] = useState("");
   const [error, setError] = useState("");
   const [mode, setMode] = useState("");
@@ -35,15 +36,15 @@ const Game = () => {
       setCatergory(catergory);
       setMode(mode);
       setHost(host);
+      setActivePlayers([...playersData]);
     }
   );
-  console.log(mode);
 
-  let activePlayers;
-
-  setTimeout(() => {
+  /*  useEffect(() => {
+    console.log("more than once");
     activePlayers = [...players];
-  }, 1000);
+    console.log(activePlayers);
+  }, [activePlayer]); */
 
   useEffect(() => {
     if (host) {
@@ -76,11 +77,16 @@ const Game = () => {
   });
 
   const getNextPlayer = () => {
+    console.log(activePlayer, user);
+
     if (activePlayers.length == 1) {
       setActivePlayer(activePlayers[0]);
+      activePlayers.splice(0, 1);
+    } else {
+      activePlayers.splice(activePlayers.indexOf(activePlayer), 1);
     }
     if (activePlayers.length == 0) {
-      //Navigate here
+      console.log("gameover");
     }
 
     const randomPlayer =
@@ -90,8 +96,7 @@ const Game = () => {
     }
     socket.emit("sendRemoveActivePlayer", activePlayer, room);
     setActivePlayer(randomPlayer);
-
-    activePlayers.splice(activePlayers.indexOf(randomPlayer), 1);
+    console.log(activePlayers);
   };
 
   ////////  RandomWord
@@ -133,6 +138,7 @@ const Game = () => {
           activePlayerTrue={activePlayerTrue}
           activePlayer={activePlayer}
           room={room}
+          host={host}
         />
       </div>
       <div className="gamePageContainer">
