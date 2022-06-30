@@ -6,6 +6,10 @@ import { socket } from "../../App";
 const GameOver = () => {
   const navigate = useNavigate();
 
+  /* socket.on("recievePointChange", (room, points) => {
+    setAllPoints(points);
+  }); */
+
   // socket.on("navigateToGame", () => {
   //     socket.emit("sendData", room, user, players, catergoryInput, host);
   //     navigate("/game", { replace: true });
