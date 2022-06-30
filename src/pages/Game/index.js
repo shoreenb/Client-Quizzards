@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+import { socket } from "../../App";
+import "../../App.css";
 import {
   NewCanvas,
   DisplayBox,
@@ -7,11 +12,6 @@ import {
   Countdown,
   RandomWord,
 } from "../../components";
-import { socket } from "../../App";
-import axios from "axios";
-
-import "../../App.css";
-import { io } from "socket.io-client";
 
 const Game = () => {
   const [room, setRoom] = useState("");
@@ -26,6 +26,9 @@ const Game = () => {
   const [allWords, setAllWords] = useState("");
   const [error, setError] = useState("");
   const [mode, setMode] = useState("");
+  const [guessedUsers, setGuessedUsers] = useState("");
+
+  const navigate = useNavigate();
 
   socket.on(
     "recieveData",
@@ -39,12 +42,6 @@ const Game = () => {
       setActivePlayers([...playersData]);
     }
   );
-
-  /*  useEffect(() => {
-    console.log("more than once");
-    activePlayers = [...players];
-    console.log(activePlayers);
-  }, [activePlayer]); */
 
   useEffect(() => {
     if (host) {
@@ -76,9 +73,26 @@ const Game = () => {
     }
   });
 
-  const getNextPlayer = () => {
-    console.log(activePlayer, user);
+  socket.on("recieveNavigateToGameOver", () => {
+    navigate("/gameover", { replace: true });
+  });
 
+  //Adding to guessed array to change turn
+
+  socket.on("recieveGuessed", (guessedArray, user) => {
+    if (host) {
+      setGuessedUsers([...guessedUsers, user]);
+    }
+  });
+
+  useEffect(() => {
+    if (guessedUsers.length == players.length - 1) {
+      getNextPlayer();
+      console.log("once plz");
+    }
+  }, [guessedUsers]);
+
+  const getNextPlayer = () => {
     if (activePlayers.length == 1) {
       setActivePlayer(activePlayers[0]);
       activePlayers.splice(0, 1);
@@ -86,7 +100,8 @@ const Game = () => {
       activePlayers.splice(activePlayers.indexOf(activePlayer), 1);
     }
     if (activePlayers.length == 0) {
-      console.log("gameover");
+      navigate("/gameover", { replace: true });
+      socket.emit("sendNavigateToGameOver", room);
     }
 
     const randomPlayer =
@@ -96,7 +111,7 @@ const Game = () => {
     }
     socket.emit("sendRemoveActivePlayer", activePlayer, room);
     setActivePlayer(randomPlayer);
-    console.log(activePlayers);
+    setGuessedUsers([]);
   };
 
   ////////  RandomWord
@@ -143,8 +158,14 @@ const Game = () => {
       </div>
       <div className="gamePageContainer">
         <div className="UserComponent">
-          <Countdown />
-          <Users room={room} user={user} players={players} points={points} />
+          {/* <Countdown /> */}
+          <Users
+            room={room}
+            user={user}
+            players={players}
+            points={points}
+            activePlayer={activePlayer}
+          />
         </div>
         <div className="canvas-container">
           <NewCanvas
@@ -157,7 +178,12 @@ const Game = () => {
           />
         </div>
 
-        <MessageBox room={room} user={user} players={players} />
+        <MessageBox
+          room={room}
+          user={user}
+          players={players}
+          activePlayer={activePlayer}
+        />
       </div>
     </>
   );

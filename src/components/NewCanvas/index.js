@@ -19,15 +19,20 @@ export default function NewCanvas({
   const [activeCanvas, setActiveCanvas] = useState(false);
   let ctx;
 
-  if (mode === "Hard") {
-    setHardMode(true);
-  }
-
   useEffect(() => {
     drawOnCanvas();
   }, []);
 
+  socket.on("recieveHardMode", () => {
+    console.log("hardmode");
+    setHardMode(true);
+  });
+
   useEffect(() => {
+    if (mode === "Hard") {
+      setHardMode(true);
+      socket.emit("sendHardMode", room);
+    }
     let blocker = document.querySelector(".sketch");
     setActiveCanvas(activePlayerTrue);
     setActiveDrawer(activePlayer);
