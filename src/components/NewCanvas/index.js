@@ -23,27 +23,33 @@ export default function NewCanvas({
   }, []);
 
   useEffect(() => {
-    let test = document.querySelector(".sketch");
+    let blocker = document.querySelector(".sketch");
     setActiveCanvas(activePlayerTrue);
     setActiveDrawer(activePlayer);
-    console.log(activePlayerTrue);
+
+    /* socket.emit; */
+
     if (!activePlayerTrue) {
-      test.style.pointerEvents = "none";
+      blocker.style.pointerEvents = "none";
+      setTimeout(() => {
+        if (color == "#000002") {
+          setColor("#000001");
+        } else {
+          setColor("#000002");
+        }
+      }, 1000);
     }
     if (activePlayerTrue) {
-      test.style.pointerEvents = "auto";
+      blocker.style.pointerEvents = "auto";
     }
 
     if (activeCanvas) {
       if (hardMode) {
-        console.log("mounting");
         setCanvas(blank);
         drawOnCanvas();
       }
     }
   });
-
-  useEffect(() => {}, [activePlayer]);
 
   useEffect(() => {
     if (hardMode) return;
@@ -62,6 +68,7 @@ export default function NewCanvas({
       ctx.drawImage(image, 0, 0);
     };
   }
+  //Chaning size and color
 
   const changeColor = (e) => {
     let colorChoice = e.target.value;
@@ -71,9 +78,10 @@ export default function NewCanvas({
     let sizeChoice = e.target.value;
     setSize(sizeChoice);
   };
+  //timeout for setting image and sending it
 
   let timeout;
-
+  //other players receiving and setting image
   socket.on("canvas-data", function (data) {
     let image = new Image();
     let canvas = document.querySelector("#board");
@@ -82,6 +90,10 @@ export default function NewCanvas({
     image.onload = function () {
       ctx.drawImage(image, 0, 0);
     };
+  });
+
+  socket.on("recieveActivePlayerChange", (activePlayerChange) => {
+    setActiveDrawer(activePlayerChange);
   });
 
   function drawOnCanvas() {
@@ -143,7 +155,7 @@ export default function NewCanvas({
         setPrevImage(base64ImageData);
 
         socket.emit("canvas-data", base64ImageData, room);
-      }, 1000);
+      }, 200);
     };
   }
   return (

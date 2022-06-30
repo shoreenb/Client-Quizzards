@@ -7,7 +7,10 @@ export default function MessageBox({ room, user, players }) {
   const [messages, setMessages] = useState([]);
 
   socket.on("recieveMessage", (messageData, room, userData) => {
-    setMessages([userData + " : " + messageData, ...messages]);
+    setMessages([...messages, userData + " : " + messageData]);
+    setTimeout(() => {
+      updateScroll();
+    }, 100);
   });
 
   function updateScroll() {

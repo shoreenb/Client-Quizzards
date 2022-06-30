@@ -15,7 +15,6 @@ export default function RandomWord({ catergoryChoice, error, room }) {
   });
 
   socket.on("recieveCatergoryHost", (catergoryChoice, room) => {
-    console.log(catergoryChoice);
     setCatergory(catergoryChoice);
   });
 
@@ -27,7 +26,6 @@ export default function RandomWord({ catergoryChoice, error, room }) {
 
     setWord(randomWord);
   };
-  console.log(allWords);
 
   socket.on("recieveRandomWord", (randomWord) => {
     setWord(randomWord);
