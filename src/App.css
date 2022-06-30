@@ -338,7 +338,15 @@ button {
 }
 
 #playAgainBtn{
- position: absolute;
+ /* position: absolute;
  right: 680px;
- top:500px;
+ top:500px; */
+ border-radius: 8px;
+  background-color: #008cba;
+  border: none;
+  padding: 10px 24px;
+  width: 100%;
+  color: white;
+  font-family: "Gloria Hallelujah", cursive;
+  margin-top: 5px;
 }
