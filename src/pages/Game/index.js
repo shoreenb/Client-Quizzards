@@ -24,17 +24,21 @@ const Game = () => {
   const [activePlayerTrue, setActivePlayerTrue] = useState(false);
   const [allWords, setAllWords] = useState("");
   const [error, setError] = useState("");
+  const [mode, setMode] = useState("");
 
   socket.on(
     "recieveData",
-    (roomData, userData, playersData, catergory, host) => {
+    (roomData, userData, playersData, catergory, mode, host) => {
       setPlayers([...playersData]);
       setRoom(roomData);
       setUser(userData);
       setCatergory(catergory);
+      setMode(mode);
       setHost(host);
     }
   );
+  console.log(mode);
+
   let activePlayers;
 
   setTimeout(() => {
@@ -86,26 +90,30 @@ const Game = () => {
     }
     socket.emit("sendRemoveActivePlayer", activePlayer, room);
     setActivePlayer(randomPlayer);
+
     activePlayers.splice(activePlayers.indexOf(randomPlayer), 1);
   };
-  /* setActivePlayer(activePlayers.findIndex); */
 
   ////////  RandomWord
 
   useEffect(() => {
-    const getWords = async (catergory) => {
-      if (catergory) {
-        try {
-          const { data } = await axios.get(
-            `https://quizzards-the-game.herokuapp.com/${catergory}`
-          );
-          setAllWords(data);
-        } catch (err) {
-          setError(err);
+    if (host) {
+      const getWords = async (catergory) => {
+        if (catergory) {
+          try {
+            const { data } = await axios.get(
+              `https://quizzards-the-game.herokuapp.com/${catergory}`
+            );
+            setAllWords(data);
+            socket.emit("sendCatergory", catergory, room);
+            socket.emit("sendCatergoryHost", catergory, room);
+          } catch (err) {
+            setError(err);
+          }
         }
-      }
-    };
-    getWords(catergory);
+      };
+      getWords(catergory);
+    }
   }, [catergory]);
 
   useEffect(() => {
@@ -123,6 +131,7 @@ const Game = () => {
           error={error}
           catergoryChoice={catergory}
           activePlayerTrue={activePlayerTrue}
+          activePlayer={activePlayer}
           room={room}
         />
       </div>
@@ -138,6 +147,7 @@ const Game = () => {
             players={players}
             activePlayer={activePlayer}
             activePlayerTrue={activePlayerTrue}
+            mode={mode}
           />
         </div>
 

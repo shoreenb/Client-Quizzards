@@ -9,35 +9,60 @@ export default function NewCanvas({
   players,
   activePlayer,
   activePlayerTrue,
+  mode,
 }) {
   const [color, setColor] = useState("#000000");
   const [size, setSize] = useState("3");
   const [prevImage, setPrevImage] = useState("");
   const [hardMode, setHardMode] = useState(false);
+  const [activeDrawer, setActiveDrawer] = useState("");
   const [activeCanvas, setActiveCanvas] = useState(false);
   let ctx;
 
+  if (mode === "Hard") {
+    setHardMode(true);
+  }
+
   useEffect(() => {
-    const canvas = document.querySelector("#board");
-    const ctx = canvas.getContext("2d");
-    const sketch = document.querySelector("#sketch");
-    const sketch_style = getComputedStyle(sketch);
-    canvas.width = parseInt(sketch_style.getPropertyValue("width"));
-    canvas.height = parseInt(sketch_style.getPropertyValue("height"));
+    drawOnCanvas();
   }, []);
 
   useEffect(() => {
+    let blocker = document.querySelector(".sketch");
     setActiveCanvas(activePlayerTrue);
+    setActiveDrawer(activePlayer);
+
+    /* socket.emit; */
+
+    if (!activePlayerTrue) {
+      blocker.style.pointerEvents = "none";
+      setTimeout(() => {
+        if (color == "#000002") {
+          setColor("#000001");
+        } else {
+          setColor("#000002");
+        }
+      }, 1000);
+    }
+    if (activePlayerTrue) {
+      blocker.style.pointerEvents = "auto";
+    }
 
     if (activeCanvas) {
-      drawOnCanvas();
       if (hardMode) {
         setCanvas(blank);
-      } else {
-        setCanvas(prevImage);
+        drawOnCanvas();
       }
     }
   });
+
+  useEffect(() => {
+    if (hardMode) return;
+    if (activeCanvas) {
+      drawOnCanvas();
+      setCanvas(prevImage);
+    }
+  }, [size, color]);
 
   function setCanvas(data) {
     let image = new Image();
@@ -48,6 +73,7 @@ export default function NewCanvas({
       ctx.drawImage(image, 0, 0);
     };
   }
+  //Chaning size and color
 
   const changeColor = (e) => {
     let colorChoice = e.target.value;
@@ -57,9 +83,10 @@ export default function NewCanvas({
     let sizeChoice = e.target.value;
     setSize(sizeChoice);
   };
+  //timeout for setting image and sending it
 
   let timeout;
-
+  //other players receiving and setting image
   socket.on("canvas-data", function (data) {
     let image = new Image();
     let canvas = document.querySelector("#board");
@@ -68,6 +95,10 @@ export default function NewCanvas({
     image.onload = function () {
       ctx.drawImage(image, 0, 0);
     };
+  });
+
+  socket.on("recieveActivePlayerChange", (activePlayerChange) => {
+    setActiveDrawer(activePlayerChange);
   });
 
   function drawOnCanvas() {
@@ -129,7 +160,7 @@ export default function NewCanvas({
         setPrevImage(base64ImageData);
 
         socket.emit("canvas-data", base64ImageData, room);
-      }, 1000);
+      }, 200);
     };
   }
   return (
@@ -139,14 +170,14 @@ export default function NewCanvas({
           <div className="color-picker">
             Select Brush Color: &nbsp;
             <input
-              disabled={!activePlayerTrue}
+              disabled={!activeCanvas}
               type="color"
               onChange={changeColor}
             />
           </div>
           <div className="size-picker">
             Select Brush Size: &nbsp;
-            <select disabled={!activePlayerTrue} onChange={changeSize}>
+            <select disabled={!activeCanvas} onChange={changeSize}>
               <option> 3 </option>
               <option> 6 </option>
               <option> 9 </option>

@@ -41,7 +41,7 @@ body {
 }
 
 h1 {
-  margin-top: 10rem;
+  margin-top: 2rem;
   font-family: "Henny Penny", cursive;
   font-size: 72px;
   text-shadow: 10px 10px 8px rgba(255, 0, 0, 0.6),
@@ -274,22 +274,26 @@ button {
 }
 
 .start-btn {
+  
   border-radius: 8px;
   background-color: #4caf50;
   border: none;
   padding: 10px 24px;
   width: 300px;
   font-family: "Gloria Hallelujah", cursive;
-  margin-top: 10px;
+  margin-left: 5px;
 }
 .start-btn:disabled {
   background-color: #bc9e8b;
 }
-.catergory-form {
+.catergory-form, .mode-form {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#mode, #category {
+  margin-left: 5px;
 }
 
 .board-container {
