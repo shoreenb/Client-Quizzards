@@ -14,30 +14,44 @@ export default function NewCanvas({
   const [size, setSize] = useState("3");
   const [prevImage, setPrevImage] = useState("");
   const [hardMode, setHardMode] = useState(false);
+  const [activeDrawer, setActiveDrawer] = useState("");
   const [activeCanvas, setActiveCanvas] = useState(false);
   let ctx;
 
   useEffect(() => {
-    const canvas = document.querySelector("#board");
-    const ctx = canvas.getContext("2d");
-    const sketch = document.querySelector("#sketch");
-    const sketch_style = getComputedStyle(sketch);
-    canvas.width = parseInt(sketch_style.getPropertyValue("width"));
-    canvas.height = parseInt(sketch_style.getPropertyValue("height"));
+    drawOnCanvas();
   }, []);
 
   useEffect(() => {
+    let test = document.querySelector(".sketch");
     setActiveCanvas(activePlayerTrue);
+    setActiveDrawer(activePlayer);
+    console.log(activePlayerTrue);
+    if (!activePlayerTrue) {
+      test.style.pointerEvents = "none";
+    }
+    if (activePlayerTrue) {
+      test.style.pointerEvents = "auto";
+    }
 
     if (activeCanvas) {
-      drawOnCanvas();
       if (hardMode) {
+        console.log("mounting");
         setCanvas(blank);
-      } else {
-        setCanvas(prevImage);
+        drawOnCanvas();
       }
     }
   });
+
+  useEffect(() => {}, [activePlayer]);
+
+  useEffect(() => {
+    if (hardMode) return;
+    if (activeCanvas) {
+      drawOnCanvas();
+      setCanvas(prevImage);
+    }
+  }, [size, color]);
 
   function setCanvas(data) {
     let image = new Image();
@@ -139,14 +153,14 @@ export default function NewCanvas({
           <div className="color-picker">
             Select Brush Color: &nbsp;
             <input
-              disabled={!activePlayerTrue}
+              disabled={!activeCanvas}
               type="color"
               onChange={changeColor}
             />
           </div>
           <div className="size-picker">
             Select Brush Size: &nbsp;
-            <select disabled={!activePlayerTrue} onChange={changeSize}>
+            <select disabled={!activeCanvas} onChange={changeSize}>
               <option> 3 </option>
               <option> 6 </option>
               <option> 9 </option>
