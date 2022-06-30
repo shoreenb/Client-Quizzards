@@ -4,9 +4,19 @@ import { socket } from "../../App";
 export default function RandomWord({ catergoryChoice, error, room }) {
   const [word, setWord] = useState("");
   const [allWords, setAllWords] = useState("");
+  const [catergory, setCatergory] = useState("");
 
   socket.on("recieveAllWords", (data) => {
     setAllWords(data);
+  });
+
+  socket.on("recieveCatergory", (catergoryChoice) => {
+    setCatergory(catergoryChoice);
+  });
+
+  socket.on("recieveCatergoryHost", (catergoryChoice, room) => {
+    console.log(catergoryChoice);
+    setCatergory(catergoryChoice);
   });
 
   const handleNewWord = () => {
@@ -14,9 +24,15 @@ export default function RandomWord({ catergoryChoice, error, room }) {
     // setWord visible to only active player --> send masked word to everyone else
     const randomWord = wordObj.word;
     socket.emit("sendRandomWord", randomWord, room);
+
     setWord(randomWord);
   };
   console.log(allWords);
+
+  socket.on("recieveRandomWord", (randomWord) => {
+    setWord(randomWord);
+    // setCatergory(catergoryChoice);
+  });
 
   return (
     <div className="randomWordContainer">
@@ -24,7 +40,7 @@ export default function RandomWord({ catergoryChoice, error, room }) {
         {error ? (
           <h3>{error}</h3>
         ) : (
-          <h3 className="gameTitle">Catergory: {catergoryChoice}</h3>
+          <h3 className="gameTitle">Catergory: {catergory}</h3>
         )}
       </div>
       <div>
