@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -27,8 +27,15 @@ const Game = () => {
   const [error, setError] = useState("");
   const [mode, setMode] = useState("");
   const [guessedUsers, setGuessedUsers] = useState("");
+  const [timerGameChange, setTimerGameChange] = useState(false);
+
+  const isMounted = useRef(false);
 
   const navigate = useNavigate();
+
+  //Sockets -----------------------------------------------------------------------------------
+
+  //Getting all data from home page and setting it
 
   socket.on(
     "recieveData",
@@ -42,6 +49,8 @@ const Game = () => {
       setActivePlayers([...playersData]);
     }
   );
+
+  //Setting host as first active player
 
   useEffect(() => {
     if (host) {
@@ -85,10 +94,27 @@ const Game = () => {
     }
   });
 
+  //Resetting the game, either time is up or all players have guessed-----------------------------------------------------
+
+  //Time is up
+
+  socket.on("recieveTimesUp", () => {
+    setTimerGameChange(!timerGameChange);
+  });
+
+  useEffect(() => {
+    if (isMounted.current) {
+      getNextPlayer();
+    } else {
+      isMounted.current = true;
+    }
+  }, [timerGameChange]);
+
+  //All players have guessed
+
   useEffect(() => {
     if (guessedUsers.length == players.length - 1) {
       getNextPlayer();
-      console.log("once plz");
     }
   }, [guessedUsers]);
 
@@ -110,6 +136,7 @@ const Game = () => {
       setActivePlayerTrue(false);
     }
     socket.emit("sendRemoveActivePlayer", activePlayer, room);
+    socket.emit("sendResetTimers", room);
     setActivePlayer(randomPlayer);
     setGuessedUsers([]);
   };
