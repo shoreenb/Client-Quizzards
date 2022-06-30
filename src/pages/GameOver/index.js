@@ -42,6 +42,7 @@ const GameOver = () => {
           <source src={Fireworks} type="video/mp4" />
         </video>
         <div className="grid">
+
           <div className="box box1">
             <button
               onClick={() => navigate("/")}
@@ -51,6 +52,7 @@ const GameOver = () => {
               Play Again?
             </button>
           </div>
+
         </div>
       </div>
     </>
