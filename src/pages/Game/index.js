@@ -24,17 +24,21 @@ const Game = () => {
   const [activePlayerTrue, setActivePlayerTrue] = useState(false);
   const [allWords, setAllWords] = useState("");
   const [error, setError] = useState("");
+  const [mode, setMode] = useState("");
 
   socket.on(
     "recieveData",
-    (roomData, userData, playersData, catergory, host) => {
+    (roomData, userData, playersData, catergory, mode, host) => {
       setPlayers([...playersData]);
       setRoom(roomData);
       setUser(userData);
       setCatergory(catergory);
+      setMode(mode);
       setHost(host);
     }
   );
+  console.log(mode);
+
   let activePlayers;
 
   setTimeout(() => {
