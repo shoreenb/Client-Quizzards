@@ -7,12 +7,19 @@ export default function RandomWord({
   error,
   catergoryChoice,
   activePlayerTrue,
+
   room,
 }) {
   const [word, setWord] = useState("");
   const [allWords, setAllWords] = useState("");
   const [catergory, setCatergory] = useState("");
   const [isOpen, setIsOpen] = useState(true);
+  const [activePlayer, setActivePlayer] = useState("");
+
+  useEffect(() => {
+    showModal();
+    console.log("working");
+  }, [activePlayer]);
 
   const showModal = () => {
     setIsOpen(true);
@@ -24,6 +31,10 @@ export default function RandomWord({
 
   socket.on("recieveAllWords", (data) => {
     setAllWords(data);
+  });
+
+  socket.on("recieveActivePlayerChange", (activePlayerChange) => {
+    setActivePlayer(activePlayerChange);
   });
 
   socket.on("recieveCatergory", (catergoryChoice) => {

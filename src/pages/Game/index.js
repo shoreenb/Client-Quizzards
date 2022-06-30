@@ -90,9 +90,9 @@ const Game = () => {
     }
     socket.emit("sendRemoveActivePlayer", activePlayer, room);
     setActivePlayer(randomPlayer);
+
     activePlayers.splice(activePlayers.indexOf(randomPlayer), 1);
   };
-  /* setActivePlayer(activePlayers.findIndex); */
 
   ////////  RandomWord
 
@@ -131,6 +131,7 @@ const Game = () => {
           error={error}
           catergoryChoice={catergory}
           activePlayerTrue={activePlayerTrue}
+          activePlayer={activePlayer}
           room={room}
         />
       </div>
