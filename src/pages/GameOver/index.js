@@ -41,7 +41,7 @@ const GameOver = () => {
         </video>
         <div className="grid">
             <div className="box box1">
-            <button onClick={()=>navigate('/')} id="myButton" class="float-left submit-button" >Play Again?</button>
+            <button id="playAgainBtn" onClick={()=>navigate('/')} class="float-left submit-button" >Play Again?</button>
             </div>
         </div>
 

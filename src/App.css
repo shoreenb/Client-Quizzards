@@ -336,3 +336,9 @@ button {
 .congrats {
   color: white;
 }
+
+#playAgainBtn{
+ position: absolute;
+ right: 680px;
+ top:500px;
+}
