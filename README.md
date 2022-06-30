@@ -68,6 +68,7 @@ and Server side API is hosted [here]() on Heroku.
 - [NodeJS](https://nodejs.org/en/)
 - [Express](https://expressjs.com/)
 - [Cors](https://expressjs.com/en/resources/middleware/cors.html)
+- [Socket.io](https://socket.io/)
 
 ## Testing
 
