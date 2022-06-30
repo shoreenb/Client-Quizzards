@@ -146,6 +146,7 @@ const Game = () => {
             players={players}
             activePlayer={activePlayer}
             activePlayerTrue={activePlayerTrue}
+            mode={mode}
           />
         </div>
 

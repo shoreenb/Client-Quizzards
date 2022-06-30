@@ -9,6 +9,7 @@ export default function NewCanvas({
   players,
   activePlayer,
   activePlayerTrue,
+  mode,
 }) {
   const [color, setColor] = useState("#000000");
   const [size, setSize] = useState("3");
@@ -17,6 +18,10 @@ export default function NewCanvas({
   const [activeDrawer, setActiveDrawer] = useState("");
   const [activeCanvas, setActiveCanvas] = useState(false);
   let ctx;
+
+  if (mode === "Hard") {
+    setHardMode(true);
+  }
 
   useEffect(() => {
     drawOnCanvas();
