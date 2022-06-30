@@ -46,13 +46,14 @@ export default function Inputs() {
   //Press add username
   const handleSubmitUser = (e) => {
     e.preventDefault();
-
-    let chosenUser = usernameInput;
-    setUser(chosenUser);
-    setUserLocked(true);
-    setStartReady(true);
-    setUsernameInput("");
-    socket.emit("addUserPress", chosenUser, room);
+    if (usernameInput != "") {
+      let chosenUser = usernameInput;
+      setUser(chosenUser);
+      setUserLocked(true);
+      setStartReady(true);
+      setUsernameInput("");
+      socket.emit("addUserPress", chosenUser, room);
+    }
   };
 
   return (
