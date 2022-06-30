@@ -219,7 +219,14 @@ canvas {
 }
 
 .send-message-btn {
-  width: 8%;
+  width: 15%;
+  border-radius: 8px;
+  background-color: #008cba;
+  border: none;
+  padding: 10px 24px;
+  color: white;
+  font-family: "Gloria Hallelujah", cursive;
+  margin-top: 5px;
 }
 
 .join-btn,
