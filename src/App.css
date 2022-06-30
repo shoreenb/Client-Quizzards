@@ -154,27 +154,29 @@ canvas {
 .userCard {
   height: fit-content;
   width: 100%;
-  background-color: rgb(101, 119, 179);
-  padding: 5px;
+  background-color: rgb(70, 109, 239);
+  padding: 10px;
   border-radius: 20px;
   display: flex;
 
   align-items: center;
-  justify-content: space-between;
+  text-align: left;
+  gap: 1rem;
 }
-
 .usernameCard {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 100px;
   color: rgb(31, 32, 32);
   margin-left: 8px;
   text-align: start;
+  margin-block: auto;
 }
 .usernamePoints {
   color: rgb(234, 238, 240);
 
-  /* margin-top: 3px; */
-  margin-right: 22px;
+  margin-left: auto;
+  padding-right: 1rem;
+  margin-block: auto;
 }
 
 .Countdown {
@@ -274,7 +276,6 @@ button {
 }
 
 .start-btn {
-  
   border-radius: 8px;
   background-color: #4caf50;
   border: none;
@@ -286,13 +287,15 @@ button {
 .start-btn:disabled {
   background-color: #bc9e8b;
 }
-.catergory-form, .mode-form {
+.catergory-form,
+.mode-form {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#mode, #category {
+#mode,
+#category {
   margin-left: 5px;
 }
 
@@ -337,8 +340,10 @@ button {
   color: white;
 }
 
+
 #playAgainBtn{
  position: absolute;
  right: 680px;
  top:500px;
 }
+

@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { socket } from "../../App";
 import ReactDOM from "react-dom";
 
-export default function MessageBox({ room, user, players }) {
+export default function MessageBox({ room, user, players, activePlayer }) {
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [word, setWord] = useState("");
+  const [guessed, setGuessed] = useState(false);
 
   socket.on("recieveMessage", (messageData, room, userData) => {
     setMessages([...messages, userData + " : " + messageData]);
@@ -15,6 +16,10 @@ export default function MessageBox({ room, user, players }) {
   });
   socket.on("recieveRandomWord", (randomWord) => {
     setWord(randomWord);
+    setGuessed(false);
+    if (user == activePlayer) {
+      setGuessed(true);
+    }
   });
 
   function updateScroll() {
@@ -35,6 +40,8 @@ export default function MessageBox({ room, user, players }) {
         socket.emit("sendMessage", correctGuess, room, user);
         setMessages([...messages, user + " : " + correctGuess]);
         socket.emit("sendPointChange", room, user);
+        setGuessed(true);
+        socket.emit("sendGuessed", room, user);
       } else {
         socket.emit("sendMessage", messageInput, room, user);
         setMessages([...messages, user + " : " + messageInput]);
@@ -67,6 +74,7 @@ export default function MessageBox({ room, user, players }) {
             name="message"
             placeholder="Whats your guess?"
             className="textarea"
+            disabled={guessed}
             value={messageInput}
             onChange={updateMessage}
           />

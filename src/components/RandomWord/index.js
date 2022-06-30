@@ -20,7 +20,6 @@ export default function RandomWord({
 
   useEffect(() => {
     showModal();
-    console.log("working");
   }, [activePlayer]);
 
   const showModal = () => {
@@ -53,12 +52,15 @@ export default function RandomWord({
     const randomWord = wordObj.word;
     socket.emit("sendRandomWord", randomWord, room);
 
-    setWord(randomWord);
     hideModal();
   };
 
   socket.on("recieveRandomWord", (randomWord) => {
-    setWord(randomWord);
+    if (activePlayerTrue) {
+      setWord(randomWord);
+    } else {
+      setWord(randomWord.split("").fill("_").join(" "));
+    }
     hideModal();
     // setCatergory(catergoryChoice);
   });
@@ -86,6 +88,3 @@ export default function RandomWord({
     </>
   );
 }
-// randomWord(data.length, data)
-// allWords.word.split("").fill("_").join(" ")
-//!== ""
