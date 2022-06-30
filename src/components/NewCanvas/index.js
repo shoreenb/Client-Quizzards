@@ -24,9 +24,18 @@ export default function NewCanvas({
   }, []);
 
   socket.on("recieveHardMode", () => {
-    console.log("hardmode");
     setHardMode(true);
   });
+
+  socket.on("recieveBlankSlate", () => {
+    setPrevImage(blank);
+    setCanvas(blank);
+    drawOnCanvas();
+  });
+
+  useEffect(() => {
+    socket.emit("sendBlankSlate", room);
+  }, [activePlayer]);
 
   useEffect(() => {
     if (mode === "Hard") {
