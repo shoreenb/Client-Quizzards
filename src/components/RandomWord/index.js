@@ -59,7 +59,18 @@ export default function RandomWord({
     if (activePlayerTrue) {
       setWord(randomWord);
     } else {
-      setWord(randomWord.split("").fill("_").join(" "));
+      let underScoreWord = randomWord
+        .split("")
+        .map((l) => {
+          if (l === " ") {
+            return " ";
+          } else {
+            return "_ ";
+          }
+        })
+        .join("");
+
+      setWord(underScoreWord);
     }
     hideModal();
     // setCatergory(catergoryChoice);
