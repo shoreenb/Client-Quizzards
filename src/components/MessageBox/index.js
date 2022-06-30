@@ -30,7 +30,7 @@ export default function MessageBox({ room, user, players }) {
   const handleSubmitMessage = (e) => {
     e.preventDefault();
     if (messageInput != "") {
-      if (messageInput == word) {
+      if (messageInput.toLowerCase() == word.toLowerCase()) {
         let correctGuess = messageInput.split("").fill("*").join(" ");
         socket.emit("sendMessage", correctGuess, room, user);
         setMessages([...messages, user + " : " + correctGuess]);
