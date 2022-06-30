@@ -5,16 +5,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function RandomWord({
   error,
-  catergoryChoice,
+
   activePlayerTrue,
+  activePlayer,
 
   room,
+  host,
 }) {
   const [word, setWord] = useState("");
   const [allWords, setAllWords] = useState("");
   const [catergory, setCatergory] = useState("");
   const [isOpen, setIsOpen] = useState(true);
-  const [activePlayer, setActivePlayer] = useState("");
+  /* const [activePlayer, setActivePlayer] = useState(""); */
 
   useEffect(() => {
     showModal();
@@ -33,9 +35,9 @@ export default function RandomWord({
     setAllWords(data);
   });
 
-  socket.on("recieveActivePlayerChange", (activePlayerChange) => {
+  /*  socket.on("recieveActivePlayerChange", (activePlayerChange) => {
     setActivePlayer(activePlayerChange);
-  });
+  }); */
 
   socket.on("recieveCatergory", (catergoryChoice) => {
     setCatergory(catergoryChoice);
@@ -75,14 +77,10 @@ export default function RandomWord({
       </div>
       <Modal show={isOpen} onHide={hideModal}>
         <Modal.Header>
-          {activePlayerTrue ? "Start Round!" : "Wait for game to begin"}
+          {host ? "Start Round!" : "Wait for game to begin"}
         </Modal.Header>
         <Modal.Body>
-          {activePlayerTrue ? (
-            <button onClick={handleNewWord}>Random Word</button>
-          ) : (
-            ""
-          )}
+          {host ? <button onClick={handleNewWord}>Random Word</button> : ""}
         </Modal.Body>
       </Modal>
     </>
