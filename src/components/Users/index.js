@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { socket } from "../../App";
 
-export default function Users({ room, user, players }) {
+export default function Users({ room, user, players, activePlayer }) {
   const [allPoints, setAllPoints] = useState([]);
 
   useEffect(() => {
     socket.emit("sendPointsBegin", room);
-    console.log("here");
   }, [room]);
 
   socket.on("recievePointBegin", (room, points) => {
@@ -16,12 +15,16 @@ export default function Users({ room, user, players }) {
   socket.on("recievePointChange", (room, points) => {
     setAllPoints(points);
   });
+
   return (
     <>
       <div className="userCardContainer">
         {allPoints.map((user) => (
           <div className="userCard">
-            <h4 className="usernameCard">{user.user} </h4>
+            <h4 className="usernameCard">
+              {activePlayer == user.user ? "✏️ " : ""}
+              {user.user}
+            </h4>
             <p className="usernamePoints">{user.points}</p>
           </div>
         ))}
