@@ -52,13 +52,13 @@ export default function RandomWord({
 
   socket.on("recieveResetTimers", () => {
     clearInterval(interval);
-    setTimeLeft(0);
+
     setTimeOutOn(false);
   });
 
   useEffect(() => {
     if (timeOutOn) {
-      setTimeLeft(10);
+      setTimeLeft(120);
       interval = setInterval(
         () => setTimeLeft((prevTimeLeft) => prevTimeLeft - 1),
         1000
