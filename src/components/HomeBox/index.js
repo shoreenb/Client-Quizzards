@@ -68,18 +68,39 @@ export default function HomeBox({ startReady, room, user }) {
         className="catergory-form"
         onSubmit={handleSendData}
       >
-        <label htmlFor="category"></label>
-        <select
-          id="category"
-          name="category"
-          className="select-box"
-          value={catergoryInput}
-          onChange={updateCatergory}
-        >
-          <option value="Animals">Animals</option>
-          <option value="Food">Food</option>
-          <option value="Random">Random</option>
-        </select>
+        {host ? (
+          <>
+            <label htmlFor="category"></label>
+            <select
+              id="category"
+              name="category"
+              className="select-box"
+              value={catergoryInput}
+              onChange={updateCatergory}
+            >
+              <option value="Animals">Animals</option>
+              <option value="Food">Food</option>
+              <option value="Random">Random</option>
+            </select>
+          </>
+        ) : (
+          <>
+            <label htmlFor="category"></label>
+            <select
+              id="category"
+              name="category"
+              disabled
+              className="select-box"
+              value={catergoryInput}
+              onChange={updateCatergory}
+            >
+              <option value="Animals">Animals</option>
+              <option value="Food">Food</option>
+              <option value="Random">Random</option>
+            </select>
+          </>
+        )}
+
         <button className="start-btn" disabled={!host} type="submit">
           Start game!
         </button>
