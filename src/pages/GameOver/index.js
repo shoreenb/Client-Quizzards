@@ -6,6 +6,10 @@ import { socket } from "../../App";
 const GameOver = () => {
   const navigate = useNavigate();
 
+  /* socket.on("recievePointChange", (room, points) => {
+    setAllPoints(points);
+  }); */
+
   // socket.on("navigateToGame", () => {
   //     socket.emit("sendData", room, user, players, catergoryInput, host);
   //     navigate("/game", { replace: true });
@@ -19,7 +23,7 @@ const GameOver = () => {
     navigate("/gameover", { replace: true });
   };
   return (
-    <>
+    <div className="final-page">
       <div className="home">
         <h1 className="congrats">Congratulations (username)!</h1>
       </div>
@@ -42,7 +46,6 @@ const GameOver = () => {
           <source src={Fireworks} type="video/mp4" />
         </video>
         <div className="grid">
-
           <div className="box box1">
             <button
               onClick={() => navigate("/")}
@@ -52,10 +55,9 @@ const GameOver = () => {
               Play Again?
             </button>
           </div>
-
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
