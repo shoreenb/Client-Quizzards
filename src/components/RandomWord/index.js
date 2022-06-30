@@ -4,22 +4,6 @@ import { socket } from "../../App";
 export default function RandomWord({ catergoryChoice, error, room }) {
   const [word, setWord] = useState("");
   const [allWords, setAllWords] = useState("");
-  // const [maskedWord, setMaskedWord] = useState("");
-  // const [state, setState] = useState(false);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (allWords) {
-  //       console.log(allWords);
-  //       setWord(allWords[[Math.floor(Math.random() * allWords.length)]]);
-  //       console.log(word);
-  //     }
-  //   }, 1000);
-  // }, [state]);
-
-  // const stateChange = () => {
-  //   setState(!state);
-  // };
 
   socket.on("recieveAllWords", (data) => {
     setAllWords(data);
@@ -27,9 +11,9 @@ export default function RandomWord({ catergoryChoice, error, room }) {
 
   const handleNewWord = () => {
     const wordObj = allWords[[Math.floor(Math.random() * allWords.length)]];
-    console.log(wordObj);
-
+    // setWord visible to only active player --> send masked word to everyone else
     const randomWord = wordObj.word;
+    socket.emit("sendRandomWord", randomWord, room);
     setWord(randomWord);
   };
   console.log(allWords);
