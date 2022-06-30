@@ -7,7 +7,7 @@ export default function HomeBox({ startReady, room, user }) {
   const [players, setPlayers] = useState([]);
   const [host, setHost] = useState(false);
   const [catergoryInput, setCatergoryInput] = useState("animals");
-  const [modeInput, setModeInput] = useState(false);
+  const [modeInput, setModeInput] = useState("Easy");
 
   const navigate = useNavigate();
 
@@ -31,6 +31,7 @@ export default function HomeBox({ startReady, room, user }) {
 
   const handleSendData = (e) => {
     e.preventDefault();
+
     socket.emit(
       "sendData",
       room,
@@ -92,68 +93,32 @@ export default function HomeBox({ startReady, room, user }) {
         className="catergory-form"
         onSubmit={handleSendData}
       >
-        {host ? (
-          <>
-            <label htmlFor="category"></label>
-            <select
-              id="category"
-              name="category"
-              className="select-box"
-              value={catergoryInput}
-              onChange={updateCatergory}
-            >
-              <option value="Animals">Animals</option>
-              <option value="Food">Food</option>
-              <option value="Random">Random</option>
-            </select>
-          </>
-        ) : (
-          <>
-            <label htmlFor="category"></label>
-            <select
-              id="category"
-              name="category"
-              disabled
-              className="select-box"
-              value={catergoryInput}
-              onChange={updateCatergory}
-            >
-              <option value="Animals">Animals</option>
-              <option value="Food">Food</option>
-              <option value="Random">Random</option>
-            </select>
-          </>
-        )}
-        {host ? (
-          <>
-            <label htmlFor="mode"></label>
-            <select
-              id="mode"
-              name="mode"
-              className="select-box"
-              value={modeInput}
-              onChange={updateMode}
-            >
-              <option value="Hard">Hard Mode</option>
-              <option value="Easy">Easy Mode</option>
-            </select>
-          </>
-        ) : (
-          <>
-            <label htmlFor="mode"></label>
-            <select
-              disabled
-              id="mode"
-              name="mode"
-              className="select-box"
-              value={modeInput}
-              onChange={updateMode}
-            >
-              <option value="Hard">Hard Mode</option>
-              <option value="Easy">Easy Mode</option>
-            </select>
-          </>
-        )}
+        <label htmlFor="category"></label>
+        <select
+          id="category"
+          name="category"
+          disabled={!host}
+          className="select-box"
+          value={catergoryInput}
+          onChange={updateCatergory}
+        >
+          <option value="animals">Animals</option>
+          <option value="food">Food</option>
+          <option value="random">Random</option>
+        </select>
+
+        <label htmlFor="mode"></label>
+        <select
+          id="mode"
+          name="mode"
+          disabled={!host}
+          className="select-box"
+          value={modeInput}
+          onChange={updateMode}
+        >
+          <option value="Easy">Easy Mode</option>
+          <option value="Hard">Blind Mode</option>
+        </select>
 
         <button className="start-btn" disabled={!host} type="submit">
           Start game!
