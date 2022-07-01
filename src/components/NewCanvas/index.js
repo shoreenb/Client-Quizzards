@@ -19,23 +19,30 @@ export default function NewCanvas({
   const [activeCanvas, setActiveCanvas] = useState(false);
   let ctx;
 
+  const changeColor = (e) => {
+    let colorChoice = e.target.value;
+    setColor(colorChoice);
+  };
+  const changeSize = (e) => {
+    let sizeChoice = e.target.value;
+    setSize(sizeChoice);
+  };
+
   useEffect(() => {
     drawOnCanvas();
   }, []);
 
-  socket.on("recieveHardMode", () => {
-    setHardMode(true);
-  });
-
-  socket.on("recieveBlankSlate", () => {
-    setPrevImage(blank);
-    setCanvas(blank);
-    drawOnCanvas();
-  });
-
   useEffect(() => {
     socket.emit("sendBlankSlate", room);
   }, [activePlayer]);
+
+  useEffect(() => {
+    if (hardMode) return;
+    if (activeCanvas) {
+      drawOnCanvas();
+      setCanvas(prevImage);
+    }
+  }, [size, color]);
 
   useEffect(() => {
     if (mode === "Hard") {
@@ -70,13 +77,16 @@ export default function NewCanvas({
     }
   });
 
-  useEffect(() => {
-    if (hardMode) return;
-    if (activeCanvas) {
-      drawOnCanvas();
-      setCanvas(prevImage);
-    }
-  }, [size, color]);
+  socket.on("recieveHardMode", () => {
+    setHardMode(true);
+  });
+
+  socket.on("recieveBlankSlate", () => {
+    //Only once!
+
+    setCanvas(blank);
+    drawOnCanvas();
+  });
 
   function setCanvas(data) {
     let image = new Image();
@@ -89,14 +99,6 @@ export default function NewCanvas({
   }
   //Chaning size and color
 
-  const changeColor = (e) => {
-    let colorChoice = e.target.value;
-    setColor(colorChoice);
-  };
-  const changeSize = (e) => {
-    let sizeChoice = e.target.value;
-    setSize(sizeChoice);
-  };
   //timeout for setting image and sending it
 
   let timeout;
@@ -174,7 +176,7 @@ export default function NewCanvas({
         setPrevImage(base64ImageData);
 
         socket.emit("canvas-data", base64ImageData, room);
-      }, 200);
+      }, 1000);
     };
   }
   return (
