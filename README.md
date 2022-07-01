@@ -1,4 +1,4 @@
-# Quizzards Client 
+# Quizzards Client
 
 <div id="top"></div>
 <!-- TABLE OF CONTENTS -->
@@ -38,6 +38,7 @@
 The client side user interface is hosted [here]() on Netlify
 and Server side API is hosted [here]() on Heroku.
 
+- Note that heroku server will need time to run and so in src/App.js, change the socket.io connection to localhost and run the dev server on the QuizzardsServer repo.
 
 ## Process
 
@@ -61,7 +62,6 @@ and Server side API is hosted [here]() on Heroku.
 ## Planning
 
 - [Excalidraw](https://www.Excalidraw.com/)
-
 
 ## Backend Packages
 
@@ -89,7 +89,6 @@ and Server side API is hosted [here]() on Heroku.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 <!-- FUCNTIONALITY -->
 
 ## Functionality
@@ -111,16 +110,14 @@ and our API is hosted [here] on Heroku.
 
 # Installation and Usage
 
-
 Please follow instructions on installing and setting up this app. Ensure to have server running to run application.
 
 1. Fork or clone the repo and move into the folder
 2. In the command line run the following script to launch the server `npm run start`
 
-
 Test:
 
-- Run tests with `npm run test` and 
+- Run tests with `npm run test` and
 - Check test coverage with `npm test -- --coverage`.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -138,7 +135,6 @@ Group project done by:
 - <a href="https://github.com/SamHardiment">Sam Hardiment</a>
 - <a href="https://github.com/shoreenb">Shoreen Beckford</a>
 - <a href="https://github.com/Izgardon">William Sessions</a>
-
 
 Project Link: [Server](https://github.com/SamHardiment/ServerQuizzards)
 
