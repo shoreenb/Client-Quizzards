@@ -3,6 +3,8 @@ import { socket } from "../../App";
 import { Modal, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+let interval;
+
 export default function RandomWord({
   error,
 
@@ -16,6 +18,8 @@ export default function RandomWord({
   const [allWords, setAllWords] = useState("");
   const [catergory, setCatergory] = useState("");
   const [isOpen, setIsOpen] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [timeOutOn, setTimeOutOn] = useState(false);
   /* const [activePlayer, setActivePlayer] = useState(""); */
 
   useEffect(() => {
@@ -46,6 +50,37 @@ export default function RandomWord({
     setCatergory(catergoryChoice);
   });
 
+  socket.on("recieveResetTimers", () => {
+    clearInterval(interval);
+
+    setTimeOutOn(false);
+  });
+
+  useEffect(() => {
+    if (timeOutOn) {
+      setTimeLeft(30);
+      interval = setInterval(
+        () => setTimeLeft((prevTimeLeft) => prevTimeLeft - 1),
+        1000
+      );
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timeOutOn]);
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+      setTimeLeft(0);
+      setTimeOutOn(false);
+      if (host) {
+        socket.emit("sendTimesUp", room);
+      }
+    }
+  }, [timeLeft]);
+
   const handleNewWord = () => {
     const wordObj = allWords[[Math.floor(Math.random() * allWords.length)]];
     // setWord visible to only active player --> send masked word to everyone else
@@ -56,10 +91,22 @@ export default function RandomWord({
   };
 
   socket.on("recieveRandomWord", (randomWord) => {
+    setTimeOutOn(true);
     if (activePlayerTrue) {
       setWord(randomWord);
     } else {
-      setWord(randomWord.split("").fill("_").join(" "));
+      let underScoreWord = randomWord
+        .split("")
+        .map((l) => {
+          if (l === " ") {
+            return " ";
+          } else {
+            return "_ ";
+          }
+        })
+        .join("");
+
+      setWord(underScoreWord);
     }
     hideModal();
     // setCatergory(catergoryChoice);
@@ -76,13 +123,20 @@ export default function RandomWord({
           )}
         </div>
         <p className="word">{word ? word : "Press Start To Begin"}</p>
+        <p className="timer">{timeLeft}</p>
       </div>
       <Modal show={isOpen} onHide={hideModal}>
         <Modal.Header>
-          {host ? "Start Round!" : "Wait for game to begin"}
+          {host ? "Start Round!" : "Wait for round to begin"}
         </Modal.Header>
         <Modal.Body>
-          {host ? <button onClick={handleNewWord}>Random Word</button> : ""}
+          {host ? (
+            <button className="join-btn" onClick={handleNewWord}>
+              Random Word
+            </button>
+          ) : (
+            ""
+          )}
         </Modal.Body>
       </Modal>
     </>

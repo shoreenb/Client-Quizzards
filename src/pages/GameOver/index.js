@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Fireworks from "../../components/video/fireworks.mp4";
 import { useNavigate } from "react-router-dom";
 import { socket } from "../../App";
@@ -6,22 +6,24 @@ import { socket } from "../../App";
 const GameOver = () => {
   const navigate = useNavigate();
 
-  // socket.on("navigateToGame", () => {
-  //     socket.emit("sendData", room, user, players, catergoryInput, host);
-  //     navigate("/game", { replace: true });
-  //   });
+  const [allPoints, setAllPoints] = useState([{ user: "user", points: 0 }]);
 
-  const handleSendData = (e) => {
-    // e.preventDefault();
-    // socket.emit("sendData", room, user, players, catergoryInput, host);
-    // socket.emit("navigateAllPlayers", room);
+  socket.on("scoreBoard", (points) => {
+    setAllPoints(points);
+  });
 
-    navigate("/gameover", { replace: true });
-  };
   return (
-    <>
+    <div className="final-page">
       <div className="home">
-        <h1 className="congrats">Congratulations (username)!</h1>
+        <h1 className="congrats">Congratulations!</h1>
+      </div>
+      <div className="scoreboard">
+        {allPoints.map((user) => (
+          <div className="userCard">
+            <h4 className="usernameCard">{user.user}</h4>
+            <p className="usernamePoints">{user.points}</p>
+          </div>
+        ))}
       </div>
       <div className="fireworks">
         <video
@@ -42,7 +44,6 @@ const GameOver = () => {
           <source src={Fireworks} type="video/mp4" />
         </video>
         <div className="grid">
-
           <div className="box box1">
             <button
               onClick={() => navigate("/")}
@@ -52,10 +53,9 @@ const GameOver = () => {
               Play Again?
             </button>
           </div>
-
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
