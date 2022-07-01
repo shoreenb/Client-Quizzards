@@ -126,8 +126,8 @@ const Game = () => {
       activePlayers.splice(activePlayers.indexOf(activePlayer), 1);
     }
     if (activePlayers.length == 0) {
-      navigate("/gameover", { replace: true });
       socket.emit("sendNavigateToGameOver", room);
+      navigate("/gameover", { replace: true });
     }
 
     const randomPlayer =
@@ -173,7 +173,6 @@ const Game = () => {
     <>
       <div className="bkImgGame"></div>
       <div className="randomWord">
-        <button onClick={getNextPlayer}>Press me</button>
         <RandomWord
           error={error}
           catergoryChoice={catergory}

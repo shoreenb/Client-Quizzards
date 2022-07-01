@@ -155,7 +155,7 @@ canvas {
 .userCard {
   height: fit-content;
   width: 100%;
-  background-color: rgb(70, 109, 239);
+  background-color: #008cba;
   padding: 10px;
   border-radius: 20px;
   display: flex;
@@ -348,6 +348,8 @@ button {
 
 .congrats {
   color: white;
+  position: absolute;
+  top: 4rem;
 }
 
 .final-page {
@@ -378,4 +380,14 @@ button {
   color: #008cba;
   font-size: 2rem;
   font-weight: 800;
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: absolute;
+  left: 25%;
+  top: 15rem;
+  width: 50%;
 }
