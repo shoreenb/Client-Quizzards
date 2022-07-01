@@ -58,7 +58,7 @@ export default function RandomWord({
 
   useEffect(() => {
     if (timeOutOn) {
-      setTimeLeft(30);
+      setTimeLeft(70);
       interval = setInterval(
         () => setTimeLeft((prevTimeLeft) => prevTimeLeft - 1),
         1000
