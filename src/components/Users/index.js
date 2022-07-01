@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { socket } from "../../App";
 
-export default function Users({ room, user, players, activePlayer }) {
+export default function Users({ room, userCheck, players, activePlayer }) {
   const [allPoints, setAllPoints] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,11 @@ export default function Users({ room, user, players, activePlayer }) {
     <>
       <div className="userCardContainer">
         {allPoints.map((user) => (
-          <div className="userCard">
+          <div
+            className={
+              user.user == userCheck ? "userCard highlight" : "userCard"
+            }
+          >
             <h4 className="usernameCard">
               {activePlayer == user.user ? "✏️ " : ""}
               {user.user}
