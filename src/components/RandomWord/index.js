@@ -127,10 +127,16 @@ export default function RandomWord({
       </div>
       <Modal show={isOpen} onHide={hideModal}>
         <Modal.Header>
-          {host ? "Start Round!" : "Wait for game to begin"}
+          {host ? "Start Round!" : "Wait for round to begin"}
         </Modal.Header>
         <Modal.Body>
-          {host ? <button onClick={handleNewWord}>Random Word</button> : ""}
+          {host ? (
+            <button className="join-btn" onClick={handleNewWord}>
+              Random Word
+            </button>
+          ) : (
+            ""
+          )}
         </Modal.Body>
       </Modal>
     </>
