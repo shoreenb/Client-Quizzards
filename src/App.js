@@ -5,8 +5,8 @@ import "./App.css";
 import { io } from "socket.io-client";
 import GameOver from "./pages/GameOver";
 
-// export const socket = io("http://localhost:5000");
-export const socket = io("https://quizzards-the-game.herokuapp.com/");
+export const socket = io("http://localhost:5000");
+// export const socket = io("https://quizzards-the-game.herokuapp.com/");
 
 const App = () => {
   useEffect(() => {});
