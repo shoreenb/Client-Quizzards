@@ -34,7 +34,7 @@ export default function NewCanvas({
 
   useEffect(() => {
     socket.emit("sendBlankSlate", room);
-  }, [activePlayer]);
+  }, [activeDrawer]);
 
   useEffect(() => {
     if (hardMode) return;
@@ -118,6 +118,7 @@ export default function NewCanvas({
   });
 
   function drawOnCanvas() {
+    console.log("how many times i am added");
     const canvas = document.querySelector("#board");
     const ctx = canvas.getContext("2d");
     const sketch = document.querySelector("#sketch");
@@ -129,17 +130,18 @@ export default function NewCanvas({
     let last_mouse = { x: 0, y: 0 };
 
     /* Mouse Capturing Work */
-    canvas.addEventListener(
-      "mousemove",
-      function (e) {
-        last_mouse.x = mouse.x;
-        last_mouse.y = mouse.y;
+    canvas.removeEventListener("mousemove", mousemove, false);
+    canvas.removeEventListener("mousedown", mousedown, false);
+    canvas.removeEventListener("mouseup", mouseup, false);
 
-        mouse.x = e.pageX - this.offsetLeft;
-        mouse.y = e.pageY - this.offsetTop;
-      },
-      false
-    );
+    canvas.addEventListener("mousemove", mousemove, false);
+    function mousemove(e) {
+      last_mouse.x = mouse.x;
+      last_mouse.y = mouse.y;
+
+      mouse.x = e.pageX - this.offsetLeft;
+      mouse.y = e.pageY - this.offsetTop;
+    }
 
     /* Drawing on Paint App */
     ctx.lineWidth = size;
@@ -147,21 +149,15 @@ export default function NewCanvas({
     ctx.lineCap = "round";
     ctx.strokeStyle = color;
 
-    canvas.addEventListener(
-      "mousedown",
-      function (e) {
-        canvas.addEventListener("mousemove", onPaint, false);
-      },
-      false
-    );
+    canvas.addEventListener("mousedown", mousedown, false);
+    function mousedown(e) {
+      canvas.addEventListener("mousemove", onPaint, false);
+    }
 
-    canvas.addEventListener(
-      "mouseup",
-      function () {
-        canvas.removeEventListener("mousemove", onPaint, false);
-      },
-      false
-    );
+    canvas.addEventListener("mouseup", mouseup, false);
+    function mouseup() {
+      canvas.removeEventListener("mousemove", onPaint, false);
+    }
 
     let onPaint = function () {
       ctx.beginPath();
