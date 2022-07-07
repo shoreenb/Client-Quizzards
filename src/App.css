@@ -164,6 +164,7 @@ canvas {
   text-align: left;
   gap: 1rem;
 }
+
 .usernameCard {
   font-size: 18px;
   font-weight: 100px;
@@ -171,6 +172,9 @@ canvas {
   margin-left: 8px;
   text-align: start;
   margin-block: auto;
+}
+.highlight {
+  background-color: rgb(235, 62, 62);
 }
 .usernamePoints {
   color: rgb(234, 238, 240);

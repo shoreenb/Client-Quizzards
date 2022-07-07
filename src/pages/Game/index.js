@@ -187,7 +187,7 @@ const Game = () => {
           {/* <Countdown /> */}
           <Users
             room={room}
-            user={user}
+            userCheck={user}
             players={players}
             points={points}
             activePlayer={activePlayer}
