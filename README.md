@@ -35,8 +35,8 @@
 
 ### Remote Hosting
 
-The client side user interface is hosted [here]() on Netlify
-and Server side API is hosted [here]() on Heroku.
+The client side user interface is hosted [here](https://whatsmydoodlee.netlify.app/) on Netlify
+and Server side API is hosted [here](https://quizzards-the-game.herokuapp.com/) on Heroku.
 
 
 ## Process
